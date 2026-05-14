@@ -1,0 +1,26 @@
+.list-header { margin-bottom: 24px; }
+.list-header h1 { font-size: 26px; font-weight: 800; }
+
+.spec-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.spec-btn {
+  padding: 7px 16px; border-radius: 20px; border: 1.5px solid var(--border);
+  background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; color: var(--text-muted);
+}
+.spec-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.spec-btn:hover:not(.active) { border-color: var(--primary); color: var(--primary); }
+
+.filter-row {
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+  margin-bottom: 8px;
+}
+
+.empty-state {
+  text-align: center; padding: 60px; color: var(--text-muted);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+
+.pagination {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 40px;
+}

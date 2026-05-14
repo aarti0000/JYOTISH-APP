@@ -1,0 +1,41 @@
+.astro-card {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+.astro-card:hover { transform: translateY(-4px); }
+
+.online-dot {
+  position: absolute; top: 14px; right: 14px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--success); border: 2px solid #fff;
+}
+
+.astro-card-top { text-align: center; margin-bottom: 10px; }
+.astro-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.astro-specs { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+
+.astro-bio {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 8px 0;
+  text-align: center;
+}
+
+.astro-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+.astro-rating { display: flex; align-items: center; gap: 4px; font-size: 13px; }
+.astro-price { font-size: 14px; font-weight: 700; color: var(--primary); }
+.astro-price small { font-weight: 400; font-size: 11px; color: var(--text-muted); }
+
+.astro-types {
+  display: flex; gap: 8px; margin-top: 8px;
+  color: var(--text-muted); font-size: 15px;
+}
+.type-icon { display: flex; align-items: center; }

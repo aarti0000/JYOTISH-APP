@@ -1,0 +1,61 @@
+.hero {
+  background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #5b21b6 100%);
+  padding: 80px 0 60px;
+  color: white;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.15); border-radius: 20px;
+  padding: 6px 16px; font-size: 13px; font-weight: 600;
+  margin-bottom: 20px; color: #fbbf24;
+}
+.hero-title { font-size: clamp(32px, 5vw, 56px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+.gradient-text { background: linear-gradient(90deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { font-size: 17px; color: #c4b5fd; max-width: 540px; margin: 0 auto 28px; }
+.hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-lg { padding: 14px 28px; font-size: 15px; }
+.hero-stats {
+  display: flex; gap: 40px; justify-content: center; margin-top: 48px;
+  flex-wrap: wrap;
+}
+.stat-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.stat-item strong { font-size: 26px; font-weight: 800; color: #fff; }
+.stat-item span { font-size: 12px; color: #a78bfa; }
+
+.section { padding: 60px 0; }
+.section-alt { background: #f5f3ff; }
+.section-title { font-size: 26px; font-weight: 700; color: var(--text); }
+
+.consult-type-card {
+  display: block; background: #fff; border-radius: 14px;
+  padding: 28px 24px; text-decoration: none; color: var(--text);
+  border: 2px solid transparent; box-shadow: var(--shadow);
+  transition: all 0.25s;
+}
+.consult-type-card:hover { border-color: var(--c, var(--primary)); transform: translateY(-4px); }
+.consult-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: color-mix(in srgb, var(--c, #7c3aed) 15%, white);
+  color: var(--c, var(--primary));
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.consult-type-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.consult-type-card p { font-size: 13px; color: var(--text-muted); }
+
+.spec-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+.spec-chip {
+  padding: 10px 20px; border-radius: 24px;
+  background: #fff; border: 1.5px solid var(--primary-light);
+  color: var(--primary); font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.spec-chip:hover { background: var(--primary); color: #fff; }
+
+.trust-card {
+  background: #fff; border-radius: 14px; padding: 28px 24px; box-shadow: var(--shadow);
+  text-align: center;
+}
+.trust-icon { color: var(--primary); margin-bottom: 14px; }
+.trust-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.trust-card p { font-size: 13px; color: var(--text-muted); }

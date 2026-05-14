@@ -1,0 +1,73 @@
+.navbar {
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.brand-icon { color: var(--secondary); font-size: 22px; }
+
+.navbar-links {
+  display: flex;
+  gap: 28px;
+}
+.navbar-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.navbar-links a:hover { color: var(--primary); }
+
+.navbar-actions { display: flex; align-items: center; gap: 12px; }
+.auth-buttons { display: flex; gap: 8px; }
+
+.user-menu { position: relative; }
+.user-trigger {
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: none; cursor: pointer;
+  padding: 4px 8px; border-radius: 8px;
+  transition: background 0.2s;
+}
+.user-trigger:hover { background: var(--primary-light); }
+.user-name { font-size: 14px; font-weight: 600; color: var(--text); }
+
+.dropdown {
+  position: absolute; right: 0; top: calc(100% + 8px);
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 10px; box-shadow: var(--shadow);
+  min-width: 180px; overflow: hidden; z-index: 200;
+}
+.dropdown a, .dropdown button {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 11px 16px;
+  font-size: 14px; color: var(--text);
+  background: none; border: none; cursor: pointer;
+  text-align: left; transition: background 0.15s;
+}
+.dropdown a:hover, .dropdown button:hover { background: var(--primary-light); color: var(--primary); }
+
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--text); }
+
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none; position: absolute; top: 64px; left: 0; right: 0;
+    background: #fff; flex-direction: column; gap: 0;
+    border-bottom: 1px solid var(--border); z-index: 99;
+  }
+  .navbar-links.open { display: flex; }
+  .navbar-links a { padding: 14px 20px; border-bottom: 1px solid var(--border); }
+  .menu-toggle { display: flex; }
+  .user-name { display: none; }
+}

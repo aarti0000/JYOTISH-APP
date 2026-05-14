@@ -1,0 +1,31 @@
+.auth-page {
+  min-height: calc(100vh - 64px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+}
+.auth-card { max-width: 420px; width: 100%; }
+.auth-logo { text-align: center; margin-bottom: 28px; }
+.auth-logo h1 { font-size: 22px; font-weight: 800; margin: 8px 0 4px; }
+.auth-logo p { font-size: 13px; color: var(--text-muted); }
+
+.input-wrap { position: relative; }
+.input-icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); font-size: 15px;
+}
+.input-wrap .input { padding-left: 36px; }
+
+.auth-footer { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-muted); }
+.auth-footer a { color: var(--primary); font-weight: 600; }
+
+.role-toggle {
+  display: flex; gap: 8px; margin-bottom: 20px;
+  background: var(--primary-light); border-radius: 10px; padding: 4px;
+}
+.role-btn {
+  flex: 1; padding: 9px; border: none; border-radius: 7px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  background: transparent; color: var(--text-muted); transition: all 0.2s;
+}
+.role-btn.active { background: var(--primary); color: #fff; }
