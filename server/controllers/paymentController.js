@@ -81,7 +81,7 @@ const verifyEsewaPayment = asyncHandler(async (req, res) => {
     status: 'confirmed',
   });
 
-  res.json({ success: true, message: 'भुक्तानी सफल!' });
+  res.json({ success: true, message: 'payment success' });
 });
 
 const freeConfirm = asyncHandler(async (req, res) => {
