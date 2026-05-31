@@ -165,7 +165,7 @@ export default function CalendarPage() {
                 <FiChevronLeft size={18} />
               </button>
               <div style={{ textAlign: 'center' }}>
-                <h2 style={{ fontWeight: 800, fontSize: 24, color: '#fff', margin: 0, fontFamily: "'Cinzel', serif" }}>
+                <h2 style={{ fontWeight: 800, fontSize: 24, color: 'var(--text)', margin: 0, fontFamily: "'Cinzel', serif" }}>
                   {BS_MONTHS_NP[currentMonth-1]} {currentYear}
                 </h2>
                 <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>
@@ -367,7 +367,7 @@ export default function CalendarPage() {
         {tab === 'festivals' && (
           <div>
             <div style={{ marginBottom: 24 }}>
-              <h2 style={{ fontWeight: 800, fontSize: 24, color: '#fff', marginBottom: 6, fontFamily: "'Cinzel', serif" }}>
+              <h2 style={{ fontWeight: 800, fontSize: 24, color: 'var(--text)', marginBottom: 6, fontFamily: "'Cinzel', serif" }}>
                 Festivals & Holidays — BS {currentYear}
               </h2>
               <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
@@ -399,11 +399,11 @@ export default function CalendarPage() {
                           <div style={{ width: 40, height: 40, borderRadius: 10,
                             background: 'var(--primary-light)', border: '1px solid rgba(157, 78, 221, 0.25)', display: 'flex',
                             alignItems: 'center', justifyContent: 'center',
-                            fontWeight: 800, fontSize: 15, color: '#fff' }}>
+                            fontWeight: 800, fontSize: 15, color: 'var(--primary)' }}>
                             {monthNum}
                           </div>
                           <div>
-                            <div style={{ fontWeight: 700, fontSize: 16, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+                            <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--primary)', fontFamily: "'Cinzel', serif" }}>
                               {data.monthNp} ({data.monthEn})
                             </div>
                             <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
