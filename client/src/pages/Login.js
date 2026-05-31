@@ -16,10 +16,13 @@ export default function Login() {
     setLoading(true);
     try {
       const user = await login(form.email, form.password);
-      toast.success(`Welcome back, ${user.name.split(' ')[0]}!`);
+      toast.success(`Welcome back, ${user.name.split(' ')[0]}! 🎉`);
       navigate(user.role === 'astrologer' ? '/astrologer/dashboard' : '/dashboard');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Login failed');
+      const msg = err.response?.data?.message
+        || err.message
+        || 'Login failed. Please try again.';
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
