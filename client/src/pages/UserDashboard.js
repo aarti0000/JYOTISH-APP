@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import { FiCalendar, FiClock, FiVideo, FiMessageCircle, FiPhone, FiStar } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiVideo, FiMessageCircle, FiPhone, FiStar, FiCompass } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 const STATUS_COLORS = {
