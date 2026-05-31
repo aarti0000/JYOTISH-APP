@@ -75,10 +75,10 @@ export default function AstrologerList() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>Price/min:</span>
-            <input className="input" style={{ width: 80 }} type="number" placeholder="Min ₹"
+            <input className="input" style={{ width: 95 }} type="number" placeholder="Min Rs."
               value={filters.minPrice} onChange={e => setFilters({ ...filters, minPrice: e.target.value })} />
             <span>–</span>
-            <input className="input" style={{ width: 80 }} type="number" placeholder="Max ₹"
+            <input className="input" style={{ width: 95 }} type="number" placeholder="Max Rs."
               value={filters.maxPrice} onChange={e => setFilters({ ...filters, maxPrice: e.target.value })} />
           </div>
         </div>

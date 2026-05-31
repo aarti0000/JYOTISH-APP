@@ -129,7 +129,7 @@ export default function AstrologerDashboard() {
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between',
           marginBottom:28, flexWrap:'wrap', gap:12 }}>
           <div>
-            <h1 style={{ fontSize:26, fontWeight:800 }}>Astrologer Dashboard ✨</h1>
+            <h1 style={{ fontSize:26, fontWeight:800, color: '#fff', fontFamily: "'Cinzel', serif" }}>Astrologer Dashboard</h1>
             <p className="text-muted">Hello, {user?.name?.split(' ')[0]}</p>
           </div>
           <button className={'btn ' + (isOnline ? 'btn-primary' : 'btn-outline')} onClick={toggleOnline}>
@@ -144,7 +144,7 @@ export default function AstrologerDashboard() {
             { label:"Today's Appointments", value:todayAppts.length,              icon:<FiCalendar /> },
             { label:'Upcoming',             value:upcoming.length,                icon:<FiUsers /> },
             { label:'Total Consultations',  value:profile?.totalConsultations||0, icon:<FiStar /> },
-            { label:'Rating',               value:profile?.rating?.toFixed(1)||'0.0', icon:'⭐' },
+            { label:'Rating',               value:profile?.rating?.toFixed(1)||'0.0', icon:<FiStar /> },
           ].map(item => (
             <div key={item.label} className="card" style={{ textAlign:'center', padding:20 }}>
               <div style={{ fontSize:22, color:'var(--primary)', display:'flex', justifyContent:'center', marginBottom:8 }}>
@@ -191,7 +191,7 @@ export default function AstrologerDashboard() {
               ) : (
                 (activeTab==='today' ? todayAppts : appointments).map(appt => (
                   <div key={appt._id} style={{ display:'flex', alignItems:'center', gap:14,
-                    padding:14, background:'var(--bg)', borderRadius:10,
+                    padding:14, background:'rgba(255,255,255,0.02)', borderRadius:10,
                     border:'1px solid var(--border)', flexWrap:'wrap' }}>
                     <div className="avatar" style={{ width:40, height:40, fontSize:14 }}>
                       {appt.user?.avatar ? <img src={appt.user.avatar} alt="" /> : appt.user?.name?.[0]}
@@ -273,8 +273,8 @@ export default function AstrologerDashboard() {
                         style={{
                           padding:'8px 14px', borderRadius:8, border:'1.5px solid',
                           fontWeight:600, fontSize:13, cursor:'pointer',
-                          borderColor: workingHours.workingDays.includes(i) ? 'var(--primary)' : 'var(--border)',
-                          background: workingHours.workingDays.includes(i) ? 'var(--primary)' : '#fff',
+                          borderColor: workingHours.workingDays.includes(i) ? 'var(--primary)' : 'rgba(157, 78, 221, 0.15)',
+                          background: workingHours.workingDays.includes(i) ? 'var(--primary)' : 'rgba(255,255,255,0.03)',
                           color: workingHours.workingDays.includes(i) ? '#fff' : 'var(--text-muted)',
                         }}>
                         {day}
@@ -312,13 +312,13 @@ export default function AstrologerDashboard() {
                     {blockedDates.sort().map(date => (
                       <div key={date} style={{ display:'flex', alignItems:'center',
                         justifyContent:'space-between', padding:'8px 12px',
-                        background:'#fee2e2', borderRadius:8, border:'1px solid #fca5a5' }}>
-                        <span style={{ fontSize:14, fontWeight:600, color:'#991b1b' }}>
+                        background:'rgba(255, 77, 109, 0.12)', borderRadius:8, border:'1px solid rgba(255, 77, 109, 0.25)' }}>
+                        <span style={{ fontSize:14, fontWeight:600, color:'#ff758f' }}>
                           {new Date(date + 'T00:00:00').toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' })}
                         </span>
                         <button onClick={() => removeBlockDate(date)}
                           style={{ background:'none', border:'none', cursor:'pointer',
-                            color:'#ef4444', fontSize:18, display:'flex', alignItems:'center' }}>
+                            color:'#ff4d6d', fontSize:18, display:'flex', alignItems:'center' }}>
                           <FiX />
                         </button>
                       </div>
@@ -344,7 +344,7 @@ export default function AstrologerDashboard() {
 
               {previewSlots.length === 0 ? (
                 <div style={{ textAlign:'center', padding:'30px 0', color:'var(--text-muted)' }}>
-                  <div style={{ fontSize:32, marginBottom:8 }}>🚫</div>
+                  <FiCalendar size={32} style={{ color:'var(--primary)', marginBottom:8 }} />
                   <p style={{ fontSize:14 }}>
                     No slots on this date.<br />
                     <span style={{ fontSize:12 }}>
@@ -361,15 +361,15 @@ export default function AstrologerDashboard() {
                     <div key={i} style={{
                       display:'flex', alignItems:'center', justifyContent:'space-between',
                       padding:'10px 14px', borderRadius:8, border:'1.5px solid',
-                      borderColor: slot.isBooked ? '#fca5a5' : '#86efac',
-                      background: slot.isBooked ? '#fef2f2' : '#f0fdf4',
+                      borderColor: slot.isBooked ? 'rgba(255, 77, 109, 0.25)' : 'rgba(56, 176, 0, 0.25)',
+                      background: slot.isBooked ? 'rgba(255, 77, 109, 0.08)' : 'rgba(56, 176, 0, 0.08)',
                     }}>
                       <span style={{ fontWeight:600, fontSize:14,
-                        color: slot.isBooked ? '#991b1b' : '#166534' }}>
+                        color: slot.isBooked ? '#ff758f' : '#70e000' }}>
                         {slot.startTime} – {slot.endTime}
                       </span>
                       <span style={{ fontSize:12, fontWeight:700,
-                        color: slot.isBooked ? '#ef4444' : '#16a34a' }}>
+                        color: slot.isBooked ? '#ff4d6d' : '#38b000' }}>
                         {slot.isBooked ? 'Booked' : 'Available'}
                       </span>
                     </div>

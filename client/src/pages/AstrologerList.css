@@ -1,26 +1,74 @@
-.list-header { margin-bottom: 24px; }
-.list-header h1 { font-size: 26px; font-weight: 800; }
-
-.spec-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.spec-btn {
-  padding: 7px 16px; border-radius: 20px; border: 1.5px solid var(--border);
-  background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
-  transition: all 0.2s; color: var(--text-muted);
+.list-header {
+  margin-bottom: 32px;
 }
-.spec-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-.spec-btn:hover:not(.active) { border-color: var(--primary); color: var(--primary); }
+.list-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+}
+
+.spec-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.spec-btn {
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-muted);
+}
+.spec-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: var(--glow);
+}
+.spec-btn:hover:not(.active) {
+  border-color: var(--primary);
+  color: #fff;
+  background: rgba(157, 78, 221, 0.1);
+}
 
 .filter-row {
-  display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
-  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+  background: var(--card);
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
 }
 
 .empty-state {
-  text-align: center; padding: 60px; color: var(--text-muted);
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.empty-state svg {
+  color: var(--primary);
 }
 
 .pagination {
-  display: flex; align-items: center; justify-content: center;
-  gap: 16px; margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 48px;
 }

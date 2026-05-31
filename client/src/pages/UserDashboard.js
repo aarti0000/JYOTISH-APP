@@ -59,8 +59,8 @@ export default function UserDashboard() {
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <h1 style={{ fontSize: 26, fontWeight: 800 }}>
-              Welcome, {user?.name?.split(' ')[0]} 🙏
+            <h1 style={{ fontSize: 26, fontWeight: 800, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+              Welcome, {user?.name?.split(' ')[0]}
             </h1>
             <p className="text-muted">Manage your consultations and birth charts</p>
           </div>
@@ -95,8 +95,8 @@ export default function UserDashboard() {
             <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>Completed</div>
           </div>
 
-          <Link to="/kundali" className="card" style={{ textAlign: 'center', padding: 20, textDecoration: 'none', cursor: 'pointer' }}>
-            <div style={{ fontSize: 28, marginBottom: 8 }}>🔮</div>
+          <Link to="/kundali" className="card" style={{ textAlign: 'center', padding: 20, textDecoration: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <FiCompass size={28} style={{ color: 'var(--primary)', marginBottom: 8 }} />
             <div style={{ fontSize: 28, fontWeight: 800 }}>View</div>
             <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>My Kundali</div>
           </Link>

@@ -21,7 +21,7 @@ export default function Register() {
     setLoading(true);
     try {
       const user = await register(form);
-      toast.success('Account created! Welcome to JyotishApp ✨');
+      toast.success('Account created! Welcome to AstroConnect');
       navigate(user.role === 'astrologer' ? '/astrologer/dashboard' : '/dashboard');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Registration failed');
@@ -36,9 +36,9 @@ export default function Register() {
     <div className="auth-page">
       <div className="auth-card card">
         <div className="auth-logo">
-          <FiStar style={{ color: '#f59e0b', fontSize: 28 }} />
+          <FiStar style={{ color: 'var(--primary)', fontSize: 28, filter: 'drop-shadow(0 0 5px var(--primary))' }} />
           <h1>Create Account</h1>
-          <p>Join JyotishApp for astrology guidance</p>
+          <p>Join AstroConnect for astrology guidance</p>
         </div>
 
         {/* Role toggle */}
@@ -47,7 +47,7 @@ export default function Register() {
             <button key={r} type="button"
               className={`role-btn ${form.role === r ? 'active' : ''}`}
               onClick={() => setForm({ ...form, role: r })}>
-              {r === 'user' ? '🙏 I am a User' : '⭐ I am an Astrologer'}
+              {r === 'user' ? 'I am a User' : 'I am an Astrologer'}
             </button>
           ))}
         </div>

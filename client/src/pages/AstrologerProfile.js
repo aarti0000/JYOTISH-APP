@@ -49,7 +49,8 @@ export default function AstrologerProfile() {
                   <span style={{
                     position: 'absolute', bottom: 16, right: 0,
                     width: 14, height: 14, borderRadius: '50%',
-                    background: 'var(--success)', border: '2px solid #fff'
+                    background: 'var(--success)', border: '2px solid rgba(21, 14, 40, 0.95)',
+                    boxShadow: '0 0 8px var(--success)'
                   }} />
                 )}
               </div>
@@ -71,8 +72,8 @@ export default function AstrologerProfile() {
                   <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Reviews</div>
                 </div>
               </div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--primary)' }}>
-                ₹{pricePerMinute}<small style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-muted)' }}>/min</small>
+              <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--secondary)' }}>
+                Rs. {pricePerMinute}<small style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-muted)' }}>/min</small>
               </div>
             </div>
 
@@ -105,7 +106,7 @@ export default function AstrologerProfile() {
                   user ? (
                     <Link key={type} to={`/book/${id}?type=${type}`}
                       className="btn btn-primary" style={{ justifyContent: 'center' }}>
-                      {typeIcons[type]} Book {typeLabels[type]} — ₹{pricePerMinute}/min
+                      {typeIcons[type]} Book {typeLabels[type]} — Rs. {pricePerMinute}/min
                     </Link>
                   ) : (
                     <Link key={type} to="/login"
