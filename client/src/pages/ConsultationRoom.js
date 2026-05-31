@@ -349,7 +349,7 @@ export default function ConsultationRoom() {
 
       {/* ── Header ─────────────────────────────────────────────── */}
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between',
-        padding:'12px 20px', background:'#1e1b4b', borderBottom:'1px solid #312e81' }}>
+        padding:'12px 20px', background:'var(--card)', borderBottom:'1px solid var(--border)' }}>
         <div style={{ display:'flex', alignItems:'center', gap:12 }}>
           <div className="avatar" style={{ width:38, height:38, fontSize:14 }}>
             {otherParty?.avatar
@@ -357,8 +357,8 @@ export default function ConsultationRoom() {
               : otherParty?.name?.[0]}
           </div>
           <div>
-            <strong style={{ color:'#fff' }}>{otherParty?.name}</strong>
-            <div style={{ fontSize:12, color:'#a78bfa' }}>
+            <strong style={{ color:'var(--text)' }}>{otherParty?.name}</strong>
+            <div style={{ fontSize:12, color:'var(--text-muted)' }}>
               {type === 'video' ? 'Video' : type === 'call' ? 'Voice' : 'Chat'} Consultation
             </div>
           </div>
@@ -367,7 +367,7 @@ export default function ConsultationRoom() {
           <div style={{ display:'flex', alignItems:'center', gap:6 }}>
             <div style={{ width:8, height:8, borderRadius:'50%',
               background: socket?.connected ? '#10b981' : '#ef4444' }} />
-            <span style={{ fontSize:12, color:'#a78bfa' }}>
+            <span style={{ fontSize:12, color:'var(--text-muted)' }}>
               {socket?.connected ? 'Connected' : 'Reconnecting...'}
             </span>
           </div>
@@ -463,28 +463,28 @@ export default function ConsultationRoom() {
         {/* ── VOICE CALL PANEL ─────────────────────────────────── */}
         {type === 'call' && (
           <div style={{ flex:1, display:'flex', alignItems:'center',
-            justifyContent:'center', background:'#0a0818' }}>
+            justifyContent:'center', background:'var(--bg)' }}>
             <div style={{ textAlign:'center', padding:40, maxWidth:420 }}>
               <div style={{ width:120, height:120, borderRadius:'50%',
-                margin:'0 auto 20px', background:'#312e81',
+                margin:'0 auto 20px', background:'var(--primary-light)',
                 display:'flex', alignItems:'center', justifyContent:'center',
                 fontSize:44, overflow:'hidden',
-                border: callStatus==='connected' ? '4px solid #10b981' : '4px solid #7c3aed',
+                border: callStatus==='connected' ? '4px solid #10b981' : '4px solid var(--primary)',
                 boxShadow: callStatus==='connected'
-                  ? '0 0 30px rgba(16,185,129,0.5)' : '0 0 20px rgba(124,58,237,0.3)' }}>
+                  ? '0 0 30px rgba(16,185,129,0.2)' : '0 0 20px rgba(124,58,237,0.15)' }}>
                 {otherParty?.avatar
                   ? <img src={otherParty.avatar} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                   : otherParty?.name?.[0]}
               </div>
 
-              <h2 style={{ color:'#fff', fontWeight:700, marginBottom:8, fontSize:22 }}>
+              <h2 style={{ color:'var(--text)', fontWeight:700, marginBottom:8, fontSize:22 }}>
                 {otherParty?.name}
               </h2>
 
               <p style={{ fontSize:15, marginBottom:32,
                 color: callStatus==='connected' ? '#10b981'
-                  : callStatus==='calling' ? '#fbbf24'
-                  : callStatus==='connecting' ? '#60a5fa' : '#a78bfa' }}>
+                  : callStatus==='calling' ? 'var(--secondary)'
+                  : callStatus==='connecting' ? 'var(--primary)' : 'var(--text-muted)' }}>
                 {callStatus==='idle'        && 'Click Start Call to begin'}
                 {callStatus==='calling'     && '📞 Calling... waiting for them to accept'}
                 {callStatus==='connecting'  && '🔄 Connecting...'}
@@ -520,8 +520,8 @@ export default function ConsultationRoom() {
                   <button onClick={toggleMic} style={{ display:'flex', alignItems:'center',
                     gap:8, padding:'14px 24px', borderRadius:50, border:'none',
                     cursor:'pointer', fontWeight:600,
-                    background: micOn ? 'rgba(255,255,255,0.15)' : 'rgba(239,68,68,0.7)',
-                    color:'#fff' }}>
+                    background: micOn ? 'var(--primary-light)' : 'rgba(239,68,68,0.1)',
+                    color: micOn ? 'var(--primary)' : '#ef4444' }}>
                     {micOn ? <><FiMic/> Mute</> : <><FiMicOff/> Unmute</>}
                   </button>
                   <button onClick={endCall} style={{ display:'flex', alignItems:'center',
@@ -541,18 +541,18 @@ export default function ConsultationRoom() {
           maxWidth: type === 'chat' ? 700 : 340,
           margin: type === 'chat' ? '0 auto' : 0,
           flexShrink: 0,
-          background: '#1a1740',
-          borderLeft: type !== 'chat' ? '1px solid #312e81' : 'none',
+          background: 'var(--card)',
+          borderLeft: type !== 'chat' ? '1px solid var(--border)' : 'none',
           display: 'flex', flexDirection: 'column',
         }}>
 
           {/* Tabs */}
-          <div style={{ display:'flex', background:'#1e1b4b', borderBottom:'1px solid #312e81' }}>
+          <div style={{ display:'flex', background:'var(--bg)', borderBottom:'1px solid var(--border)' }}>
             {['chat', ...(isAstrologer ? ['notes'] : []), 'details'].map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)} style={{
                 padding:'10px 14px', border:'none', background:'none',
-                color: activeTab===tab ? '#c4b5fd' : '#6b7280',
-                borderBottom: activeTab===tab ? '2px solid #7c3aed' : '2px solid transparent',
+                color: activeTab===tab ? 'var(--primary)' : 'var(--text-muted)',
+                borderBottom: activeTab===tab ? '2px solid var(--primary)' : '2px solid transparent',
                 cursor:'pointer', fontWeight:600, fontSize:13, textTransform:'capitalize',
                 display:'flex', alignItems:'center', gap:5 }}>
                 {tab==='chat' && <FiMessageCircle/>}
@@ -568,7 +568,7 @@ export default function ConsultationRoom() {
               <div style={{ flex:1, overflowY:'auto', padding:16,
                 display:'flex', flexDirection:'column', gap:10 }}>
                 {messages.length === 0 && (
-                  <div style={{ textAlign:'center', color:'#a78bfa', marginTop:40, fontSize:13 }}>
+                  <div style={{ textAlign:'center', color:'var(--text-muted)', marginTop:40, fontSize:13 }}>
                     No messages yet. Say hello!
                   </div>
                 )}
@@ -578,8 +578,9 @@ export default function ConsultationRoom() {
                     <div key={i} style={{ display:'flex', flexDirection:'column',
                       alignItems: isMe ? 'flex-end' : 'flex-start' }}>
                       <div style={{ maxWidth:'80%', padding:'9px 14px', borderRadius:16,
-                        fontSize:14, lineHeight:1.5, wordBreak:'break-word', color:'#fff',
-                        background: isMe ? '#7c3aed' : '#312e81',
+                        fontSize:14, lineHeight:1.5, wordBreak:'break-word',
+                        color: isMe ? '#fff' : 'var(--text)',
+                        background: isMe ? 'var(--primary)' : 'rgba(123, 44, 191, 0.08)',
                         borderBottomRightRadius: isMe ? 4 : 16,
                         borderBottomLeftRadius:  isMe ? 16 : 4 }}>
                         {msg.content}
@@ -594,20 +595,20 @@ export default function ConsultationRoom() {
               </div>
 
               <div style={{ display:'flex', gap:8, padding:12,
-                borderTop:'1px solid #312e81', background:'#1e1b4b' }}>
+                borderTop:'1px solid var(--border)', background:'var(--bg)' }}>
                 <textarea rows={2}
                   placeholder={socket?.connected ? 'Type a message...' : 'Connecting...'}
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  style={{ flex:1, resize:'none', background:'#312e81',
-                    border:'1px solid #4c1d95', borderRadius:8,
-                    color:'#e9d5ff', padding:'8px 12px', fontSize:13, outline:'none' }} />
+                  style={{ flex:1, resize:'none', background:'#fff',
+                    border:'1.5px solid var(--border)', borderRadius:8,
+                    color:'var(--text)', padding:'8px 12px', fontSize:13, outline:'none' }} />
                 <button onClick={sendMessage}
                   disabled={!input.trim() || !socket?.connected}
                   style={{ padding:'0 16px', borderRadius:8, border:'none', fontSize:18,
                     display:'flex', alignItems:'center', color:'#fff',
-                    background: input.trim() && socket?.connected ? '#7c3aed' : '#4c1d95',
+                    background: input.trim() && socket?.connected ? 'var(--primary)' : 'var(--border)',
                     cursor: input.trim() && socket?.connected ? 'pointer' : 'not-allowed' }}>
                   <FiSend/>
                 </button>
@@ -623,23 +624,23 @@ export default function ConsultationRoom() {
           {/* Details */}
           {activeTab === 'details' && (
             <div style={{ padding:16, fontSize:14, overflowY:'auto' }}>
-              <h4 style={{ marginBottom:12, color:'#e9d5ff' }}>Client Birth Details</h4>
+              <h4 style={{ marginBottom:12, color:'var(--text)' }}>Client Birth Details</h4>
               {consultation.appointment?.userBirthDetails &&
                 Object.entries(consultation.appointment.userBirthDetails).map(([k,v]) =>
                   v ? (
                     <div key={k} style={{ marginBottom:8 }}>
-                      <span style={{ color:'#a78bfa', textTransform:'capitalize' }}>
+                      <span style={{ color:'var(--text-muted)', textTransform:'capitalize' }}>
                         {k.replace(/([A-Z])/g,' $1')}:{' '}
                       </span>
-                      <strong style={{ color:'#fff' }}>{v}</strong>
+                      <strong style={{ color:'var(--text)' }}>{v}</strong>
                     </div>
                   ) : null
                 )
               }
               {consultation.appointment?.question && (
                 <div style={{ marginTop:16 }}>
-                  <span style={{ color:'#a78bfa' }}>Question: </span>
-                  <p style={{ color:'#e9d5ff', marginTop:4 }}>
+                  <span style={{ color:'var(--text-muted)' }}>Question: </span>
+                  <p style={{ color:'var(--text)', marginTop:4 }}>
                     {consultation.appointment.question}
                   </p>
                 </div>

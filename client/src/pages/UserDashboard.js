@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import { FiCalendar, FiClock, FiVideo, FiMessageCircle, FiPhone, FiStar } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiVideo, FiMessageCircle, FiPhone, FiStar, FiCompass } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 const STATUS_COLORS = {
@@ -59,7 +59,7 @@ export default function UserDashboard() {
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <h1 style={{ fontSize: 26, fontWeight: 800, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+            <h1 style={{ fontSize: 26, fontWeight: 800, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
               Welcome, {user?.name?.split(' ')[0]}
             </h1>
             <p className="text-muted">Manage your consultations and birth charts</p>

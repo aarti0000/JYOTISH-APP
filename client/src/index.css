@@ -5,22 +5,22 @@
 }
 
 :root {
-  --primary: #9d4edd;
-  --primary-dark: #7b2cbf;
-  --primary-light: rgba(157, 78, 221, 0.15);
-  --secondary: #ff9e00;
-  --bg: #090514;
-  --bg-gradient: radial-gradient(circle at 50% -20%, #241445 0%, #090514 80%);
-  --card: rgba(21, 14, 40, 0.65);
-  --card-hover: rgba(35, 22, 68, 0.85);
-  --text: #f3f0ff;
-  --text-muted: #a59fc4;
-  --border: rgba(157, 78, 221, 0.2);
-  --border-hover: rgba(157, 78, 221, 0.4);
+  --primary: #7b2cbf;          /* deep purple */
+  --primary-dark: #5a189a;     /* dark purple */
+  --primary-light: rgba(123, 44, 191, 0.08);
+  --secondary: #e65f00;        /* premium amber/gold accent */
+  --bg: #faf7f0;               /* premium warm cream white */
+  --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #f3eee3 100%);
+  --card: #ffffff;             /* pure white cards */
+  --card-hover: #fcfbfa;
+  --text: #201335;             /* deep purple-black body text */
+  --text-muted: #6e6382;       /* muted purple-gray */
+  --border: rgba(123, 44, 191, 0.15);
+  --border-hover: rgba(123, 44, 191, 0.35);
   --danger: #ff4d6d;
   --success: #38b000;
-  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-  --glow: 0 0 15px rgba(157, 78, 221, 0.45);
+  --shadow: 0 8px 30px rgba(32, 19, 53, 0.06); /* soft elegant shadow */
+  --glow: 0 0 15px rgba(123, 44, 191, 0.15);
   --radius: 16px;
 }
 
@@ -76,6 +76,13 @@ a {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Outfit', sans-serif;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.btn svg {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  flex-shrink: 0;
+  display: block;
 }
 .btn-primary {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -144,7 +151,7 @@ a {
   border: 1.5px solid var(--border);
   border-radius: 10px;
   font-size: 14px;
-  background: rgba(9, 5, 20, 0.6);
+  background: #ffffff;
   color: var(--text);
   transition: all 0.25s ease;
   outline: none;
@@ -152,8 +159,8 @@ a {
 }
 .input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
-  background: rgba(9, 5, 20, 0.9);
+  box-shadow: 0 0 10px rgba(123, 44, 191, 0.15);
+  background: #ffffff;
 }
 .input::placeholder {
   color: rgba(165, 159, 196, 0.5);
@@ -398,4 +405,50 @@ a {
     font-size: 11px !important;
   }
 }
+
+/* ── Light Theme Overrides & Global Text Rules ──────────────────────────────── */
+h1, h2, h3, h4, h5, h6, strong {
+  color: var(--text) !important;
+}
+
+/* Translucent cards styled in inline JS should adopt light card theme */
+[style*="background: rgba(21, 14, 40"], 
+[style*="background: rgba(9, 5, 20"],
+[style*="background: radial-gradient(circle at 50% 50%, rgba(157,78,221,0.15), transparent 70%), #0e0921"] {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* Force light text inside targeted dark cards to be dark */
+[style*="background: rgba(21, 14, 40"] *, 
+[style*="background: rgba(9, 5, 20"] *,
+[style*="background: radial-gradient(circle at 50% 50%"] * {
+  color: var(--text);
+}
+
+/* Keep select elements readable */
+select.input option {
+  background: var(--card) !important;
+  color: var(--text) !important;
+}
+
+/* Let the button text and active badges remain white */
+.btn, .btn *, .badge, .badge *, .online-dot {
+  color: #fff !important;
+}
+.btn-secondary, .btn-secondary * {
+  color: var(--text) !important;
+}
+.btn-outline, .btn-outline * {
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Ensure selected date cell in calendar is white text */
+[style*="background: linear-gradient(135deg, var(--primary)"] * {
+  color: #fff !important;
+}
+
 

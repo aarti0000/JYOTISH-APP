@@ -55,7 +55,7 @@ export default function RatingPage() {
   const astrologer = appointment?.astrologer;
 
   const LABELS = { 1:'Poor', 2:'Fair', 3:'Good', 4:'Very Good', 5:'Excellent' };
-  const COLORS  = { 1:'#ff4d6d', 2:'#ff9f1c', 3:'#ffb703', 4:'#aacc00', 5:'#70e000' };
+  const COLORS  = { 1:'#ff4d6d', 2:'#e65f00', 3:'#d97706', 4:'#38b000', 5:'#10b981' };
 
   return (
     <div style={{
@@ -98,7 +98,7 @@ export default function RatingPage() {
             {/* Astrologer info */}
             {astrologer && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 14,
-                padding: '14px 16px', background: 'rgba(9, 5, 20, 0.5)',
+                padding: '14px 16px', background: 'var(--card)',
                 borderRadius: 12, border: '1px solid var(--border)', marginBottom: 24 }}>
                 <div className="avatar" style={{ width: 52, height: 52, fontSize: 18, flexShrink: 0 }}>
                   {astrologer.user?.avatar
@@ -106,7 +106,7 @@ export default function RatingPage() {
                     : astrologer.user?.name?.[0]}
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>
+                  <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--text)' }}>
                     {astrologer.user?.name}
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>
@@ -139,7 +139,7 @@ export default function RatingPage() {
                       fontSize: 44, padding: '4px 6px',
                       transition: 'transform 0.1s',
                       transform: (hovered || rating) >= star ? 'scale(1.15)' : 'scale(1)',
-                      color: (hovered || rating) >= star ? 'var(--secondary)' : '#443f5d',
+                      color: (hovered || rating) >= star ? 'var(--secondary)' : '#cbd5e1',
                     }}>
                     ★
                   </button>

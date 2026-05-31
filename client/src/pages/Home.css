@@ -159,7 +159,7 @@
   font-weight: 800;
   text-align: center;
   margin-bottom: 12px;
-  color: #fff;
+  color: var(--text);
   font-family: 'Cinzel', serif;
 }
 .section-subtitle {
@@ -206,7 +206,7 @@
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #fff;
+  color: var(--text);
 }
 .consult-type-card p {
   font-size: 13px;
@@ -261,7 +261,7 @@
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 10px;
-  color: #fff;
+  color: var(--text);
 }
 .trust-card p {
   font-size: 13px;
@@ -278,7 +278,7 @@
   box-shadow: var(--shadow);
 }
 .cal-day-cell {
-  background: rgba(9, 5, 20, 0.4);
+  background: rgba(123, 44, 191, 0.02);
   border: 1.5px solid var(--border);
   border-radius: 10px;
   transition: all 0.2s ease;
@@ -287,4 +287,20 @@
   border-color: var(--primary);
   background: rgba(157, 78, 221, 0.1);
   transform: scale(1.02);
+}
+
+/* Hero theme overrides to keep text/buttons readable in dark section */
+.hero h1, .hero h2, .hero h3, .hero strong {
+  color: #ffffff !important;
+}
+.hero .stat-item span {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+.hero .btn-secondary, .hero .btn-secondary * {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+.hero .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
 }

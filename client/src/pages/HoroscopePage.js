@@ -35,10 +35,10 @@ const ZODIAC_ICONS = {
 };
 
 const ELEMENT_COLORS = {
-  Fire:  { bg: 'rgba(239, 68, 68, 0.1)', border: 'rgba(239, 68, 68, 0.25)', color: '#ff758f' },
-  Earth: { bg: 'rgba(255, 158, 0, 0.1)', border: 'rgba(255, 158, 0, 0.25)', color: '#ffb703' },
-  Air:   { bg: 'rgba(157, 78, 221, 0.1)', border: 'rgba(157, 78, 221, 0.25)', color: '#c8b6ff' },
-  Water: { bg: 'rgba(6, 182, 212, 0.1)', border: 'rgba(6, 182, 212, 0.25)', color: '#22d3ee' },
+  Fire:  { bg: 'rgba(239, 68, 68, 0.05)', border: 'rgba(239, 68, 68, 0.2)', color: '#dc2626' },
+  Earth: { bg: 'rgba(217, 119, 6, 0.05)', border: 'rgba(217, 119, 6, 0.2)', color: '#b45309' },
+  Air:   { bg: 'rgba(123, 44, 191, 0.05)', border: 'rgba(123, 44, 191, 0.2)', color: '#7b2cbf' },
+  Water: { bg: 'rgba(8, 145, 178, 0.05)', border: 'rgba(8, 145, 178, 0.2)', color: '#0891b2' },
 };
 
 const ELEMENT_ICONS = {
@@ -73,7 +73,7 @@ export default function HoroscopePage() {
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
           <FiMoon size={56} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 10px var(--primary))', marginBottom: 16 }} />
-          <h1 style={{ fontSize: 32, fontWeight: 800, color: '#fff', marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
+          <h1 style={{ fontSize: 32, fontWeight: 800, color: 'var(--text)', marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
             Daily Horoscope
           </h1>
           {today && (
@@ -117,7 +117,7 @@ export default function HoroscopePage() {
                     return Icon ? <Icon size={44} style={{ color: isSelected ? '#fff' : el.color }} /> : null;
                   })()}
                 </div>
-                <div style={{ fontSize: 18, marginBottom: 4, fontWeight: 600, color: isSelected ? '#fff' : '#c8b6ff' }}>{h.symbol}</div>
+                <div style={{ fontSize: 18, marginBottom: 4, fontWeight: 600, color: isSelected ? '#fff' : el.color }}>{h.symbol}</div>
                 <div style={{ fontWeight: 800, fontSize: 16,
                   color: isSelected ? '#fff' : 'var(--text)', fontFamily: "'Cinzel', serif" }}>
                   {h.name}
@@ -139,21 +139,21 @@ export default function HoroscopePage() {
         {selected && (
           <div className="card" style={{
             border: '1.5px solid var(--primary)',
-            background: 'rgba(21, 14, 40, 0.85)',
+            background: 'var(--card)',
             marginBottom: 40,
             boxShadow: 'var(--glow)',
           }}>
             {/* Sign header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 24,
               marginBottom: 24, flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(157, 78, 221, 0.15)', border: '1px solid rgba(157, 78, 221, 0.25)', borderRadius: 16, width: 72, height: 72, color: 'var(--primary)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--primary-light)', border: '1px solid var(--border)', borderRadius: 16, width: 72, height: 72, color: 'var(--primary)' }}>
                 {(() => {
                   const Icon = ZODIAC_ICONS[selected.name];
                   return Icon ? <Icon size={48} /> : null;
                 })()}
               </div>
               <div>
-                <h2 style={{ fontSize: 28, fontWeight: 800, color: '#fff', marginBottom: 6, fontFamily: "'Cinzel', serif" }}>
+                <h2 style={{ fontSize: 28, fontWeight: 800, color: 'var(--text)', marginBottom: 6, fontFamily: "'Cinzel', serif" }}>
                   {selected.symbol} {selected.name}
                 </h2>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -164,15 +164,15 @@ export default function HoroscopePage() {
                   <span className="badge badge-purple">Ruling: {selected.ruling}</span>
                 </div>
               </div>
-              <div style={{ marginLeft: 'auto', textAlign: 'center', background: 'rgba(157, 78, 221, 0.15)', padding: '10px 18px', borderRadius: 12, border: '1px solid rgba(157, 78, 221, 0.25)' }}>
+              <div style={{ marginLeft: 'auto', textAlign: 'center', background: 'var(--primary-light)', padding: '10px 18px', borderRadius: 12, border: '1px solid var(--border)' }}>
                 <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--secondary)' }}>{selected.rating}</div>
                 <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Daily Rating</div>
               </div>
             </div>
 
             {/* Main description */}
-            <div style={{ background: 'rgba(9, 5, 20, 0.5)', borderRadius: 12, padding: 24, marginBottom: 24,
-              border: '1px solid rgba(157, 78, 221, 0.15)' }}>
+            <div style={{ background: 'var(--bg)', borderRadius: 12, padding: 24, marginBottom: 24,
+              border: '1px solid var(--border)' }}>
               <p style={{ fontSize: 15, lineHeight: 1.8, color: 'var(--text)' }}>
                 {selected.description}
               </p>
@@ -189,7 +189,7 @@ export default function HoroscopePage() {
                   padding: 20, border: '1px solid ' + card.border }}>
                   <div style={{ fontSize: 24, marginBottom: 12, color: card.color }}>{card.icon}</div>
                   <h4 style={{ fontWeight: 700, fontSize: 15, marginBottom: 10,
-                    color: '#fff', fontFamily: "'Outfit', sans-serif" }}>{card.title}</h4>
+                    color: 'var(--text)', fontFamily: "'Outfit', sans-serif" }}>{card.title}</h4>
                   <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-muted)' }}>
                     {card.text}
                   </p>
@@ -205,14 +205,14 @@ export default function HoroscopePage() {
                 { label: 'Mood',               value: selected.mood,        icon: <FiSmile /> },
                 { label: 'Best Compatible',    value: selected.compatibility, icon: <FiUsers /> },
               ].map(item => (
-                <div key={item.label} style={{ flex: 1, minWidth: 140, background: 'rgba(9, 5, 20, 0.5)',
-                  borderRadius: 10, padding: '16px', border: '1px solid rgba(157, 78, 221, 0.15)',
+                <div key={item.label} style={{ flex: 1, minWidth: 140, background: 'var(--bg)',
+                  borderRadius: 10, padding: '16px', border: '1px solid var(--border)',
                   textAlign: 'center' }}>
                   <div style={{ fontSize: 22, marginBottom: 8, color: 'var(--primary)' }}>{item.icon}</div>
                   <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6 }}>
                     {item.label}
                   </div>
-                  <div style={{ fontWeight: 700, fontSize: 15, color: '#fff' }}>
+                  <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--text)' }}>
                     {item.value}
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function HoroscopePage() {
 
         {/* All signs quick view */}
         <div className="card">
-          <h3 style={{ fontWeight: 800, marginBottom: 20, color: '#fff', fontFamily: "'Cinzel', serif" }}>Today's Quick Overview — All Signs</h3>
+          <h3 style={{ fontWeight: 800, marginBottom: 20, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>Today's Quick Overview — All Signs</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {horoscopes.map(h => {
               const el = ELEMENT_COLORS[h.element];
@@ -249,7 +249,7 @@ export default function HoroscopePage() {
                     e.currentTarget.style.transform = 'none';
                     e.currentTarget.style.borderColor = el.border;
                   }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid ' + el.border, borderRadius: 12, width: 48, height: 48, flexShrink: 0, color: el.color }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--primary-light)', border: '1px solid ' + el.border, borderRadius: 12, width: 48, height: 48, flexShrink: 0, color: el.color }}>
                     {(() => {
                       const Icon = ZODIAC_ICONS[h.name];
                       return Icon ? <Icon size={28} /> : null;
@@ -258,7 +258,7 @@ export default function HoroscopePage() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10,
                       marginBottom: 6, flexWrap: 'wrap' }}>
-                      <strong style={{ fontSize: 16, color: '#fff', fontFamily: "'Cinzel', serif" }}>{h.symbol} {h.name}</strong>
+                      <strong style={{ fontSize: 16, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>{h.symbol} {h.name}</strong>
                       <span style={{ fontSize: 12, color: el.color, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                         {ELEMENT_ICONS[h.element]} {h.element}
                       </span>
@@ -269,8 +269,8 @@ export default function HoroscopePage() {
                     </p>
                   </div>
                   <div style={{ fontSize: 12, color: 'var(--text-muted)', flexShrink: 0, textAlign: 'right', lineHeight: 1.7 }}>
-                    Color: <span style={{ color: '#fff', fontWeight: 600 }}>{h.luckyColor}</span><br />
-                    No: <span style={{ color: '#fff', fontWeight: 600 }}>{h.luckyNumber}</span>
+                    Color: <span style={{ color: 'var(--text)', fontWeight: 600 }}>{h.luckyColor}</span><br />
+                    No: <span style={{ color: 'var(--text)', fontWeight: 600 }}>{h.luckyNumber}</span>
                   </div>
                 </div>
               );

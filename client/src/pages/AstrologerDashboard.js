@@ -129,7 +129,7 @@ export default function AstrologerDashboard() {
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between',
           marginBottom:28, flexWrap:'wrap', gap:12 }}>
           <div>
-            <h1 style={{ fontSize:26, fontWeight:800, color: '#fff', fontFamily: "'Cinzel', serif" }}>Astrologer Dashboard</h1>
+            <h1 style={{ fontSize:26, fontWeight:800, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>Astrologer Dashboard</h1>
             <p className="text-muted">Hello, {user?.name?.split(' ')[0]}</p>
           </div>
           <button className={'btn ' + (isOnline ? 'btn-primary' : 'btn-outline')} onClick={toggleOnline}>
@@ -191,7 +191,7 @@ export default function AstrologerDashboard() {
               ) : (
                 (activeTab==='today' ? todayAppts : appointments).map(appt => (
                   <div key={appt._id} style={{ display:'flex', alignItems:'center', gap:14,
-                    padding:14, background:'rgba(255,255,255,0.02)', borderRadius:10,
+                    padding:14, background:'var(--bg)', borderRadius:10,
                     border:'1px solid var(--border)', flexWrap:'wrap' }}>
                     <div className="avatar" style={{ width:40, height:40, fontSize:14 }}>
                       {appt.user?.avatar ? <img src={appt.user.avatar} alt="" /> : appt.user?.name?.[0]}
@@ -313,7 +313,7 @@ export default function AstrologerDashboard() {
                       <div key={date} style={{ display:'flex', alignItems:'center',
                         justifyContent:'space-between', padding:'8px 12px',
                         background:'rgba(255, 77, 109, 0.12)', borderRadius:8, border:'1px solid rgba(255, 77, 109, 0.25)' }}>
-                        <span style={{ fontSize:14, fontWeight:600, color:'#ff758f' }}>
+                        <span style={{ fontSize:14, fontWeight:600, color:'var(--danger)' }}>
                           {new Date(date + 'T00:00:00').toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' })}
                         </span>
                         <button onClick={() => removeBlockDate(date)}
@@ -365,11 +365,11 @@ export default function AstrologerDashboard() {
                       background: slot.isBooked ? 'rgba(255, 77, 109, 0.08)' : 'rgba(56, 176, 0, 0.08)',
                     }}>
                       <span style={{ fontWeight:600, fontSize:14,
-                        color: slot.isBooked ? '#ff758f' : '#70e000' }}>
+                        color: slot.isBooked ? 'var(--danger)' : 'var(--success)' }}>
                         {slot.startTime} – {slot.endTime}
                       </span>
                       <span style={{ fontSize:12, fontWeight:700,
-                        color: slot.isBooked ? '#ff4d6d' : '#38b000' }}>
+                        color: slot.isBooked ? 'var(--danger)' : 'var(--success)' }}>
                         {slot.isBooked ? 'Booked' : 'Available'}
                       </span>
                     </div>

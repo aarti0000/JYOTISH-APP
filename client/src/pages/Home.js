@@ -106,7 +106,7 @@ export default function Home() {
                 Consult Now <FiArrowRight />
               </Link>
               <Link to="/horoscope" className="btn btn-secondary" style={{ padding: '14px 28px', fontSize: '15px' }}>
-                <FiMoon /> Daily Horoscope
+                Daily Horoscope
               </Link>
             </div>
             <div className="hero-stats">
@@ -127,24 +127,24 @@ export default function Home() {
 
       {/* ── TODAY'S PANCHANG STRIP ─────────────────────────────────── */}
       {todayInfo && (
-        <div style={{ background: '#0e0921', padding: '14px 0', borderBottom: '1px solid rgba(157, 78, 221, 0.15)' }}>
+        <div style={{ background: 'var(--primary-light)', padding: '14px 0', borderBottom: '1px solid var(--border)' }}>
           <div className="container">
             <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', justifyContent: 'center' }}>
               <span style={{ color: 'var(--primary)', fontSize: 13, fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                 <FiCalendar /> Today's Panchang:
               </span>
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: 14 }}>
+              <span style={{ color: 'var(--text)', fontWeight: 700, fontSize: 14 }}>
                 {todayInfo.bs.dayNp} {todayInfo.bs.monthNp} {todayInfo.bs.year} BS
               </span>
               <span style={{ color: 'var(--text-muted)', fontSize: 13 }}>({todayInfo.ad})</span>
               <span style={{ color: 'var(--secondary)', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                 <FiMoon /> {todayInfo.tithi}
               </span>
-              <span style={{ color: '#c8b6ff', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+              <span style={{ color: 'var(--primary)', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                 <FiCompass /> {todayInfo.paksha}
               </span>
               {todayInfo.festivals.map((f, i) => (
-                <span key={i} style={{ background: 'rgba(157, 78, 221, 0.15)', border: '1px solid rgba(157, 78, 221, 0.25)', borderRadius: 20, padding: '3px 12px', fontSize: 12, color: '#fff' }}>
+                <span key={i} style={{ background: 'rgba(123, 44, 191, 0.08)', border: '1px solid var(--border)', borderRadius: 20, padding: '3px 12px', fontSize: 12, color: 'var(--primary)', fontWeight: 600 }}>
                   {f.name}
                 </span>
               ))}
@@ -168,7 +168,7 @@ export default function Home() {
                 <FiChevronLeft size={18} />
               </button>
               <div style={{ textAlign: 'center' }}>
-                <h3 style={{ fontWeight: 800, fontSize: 22, color: '#fff', margin: 0 }}>
+                <h3 style={{ fontWeight: 800, fontSize: 22, color: 'var(--text)', margin: 0 }}>
                   {BS_MONTHS_NP[currentMonth-1]} {currentYear}
                 </h3>
                 <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>
@@ -196,7 +196,7 @@ export default function Home() {
                       padding: '10px 4px',
                       fontWeight: 700,
                       fontSize: 13,
-                      background: 'rgba(255, 255, 255, 0.02)',
+                      background: 'rgba(123, 44, 191, 0.03)',
                       borderRadius: 8,
                       color: i===6 ? '#ff4d6d' : i===0 ? 'var(--secondary)' : 'var(--text-muted)'
                     }}>
@@ -231,7 +231,7 @@ export default function Home() {
                           padding: '8px',
                           background: isTodayDay ? 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)'
                             : isSelected ? 'rgba(255, 158, 0, 0.1)'
-                            : hasFestival ? 'rgba(157, 78, 221, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                            : hasFestival ? 'rgba(157, 78, 221, 0.05)' : 'rgba(123, 44, 191, 0.02)',
                           cursor: 'pointer',
                           transition: 'all 0.2s ease',
                           boxShadow: isTodayDay ? 'var(--glow)' : 'none',
@@ -287,15 +287,15 @@ export default function Home() {
                 {selectedDay && (
                   <div style={{
                     marginTop: 20, padding: 24,
-                    background: 'rgba(21, 14, 40, 0.9)',
+                    background: 'var(--card)',
                     borderRadius: 12,
-                    border: '1.5px solid var(--secondary)',
-                    boxShadow: '0 0 20px rgba(255, 158, 0, 0.15)',
+                    border: '1.5px solid var(--border)',
+                    boxShadow: 'var(--shadow)',
                     backdropFilter: 'blur(8px)'
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
                       <div>
-                        <h4 style={{ fontWeight: 800, fontSize: 18, margin: 0, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+                        <h4 style={{ fontWeight: 800, fontSize: 18, margin: 0, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
                           {selectedDay.bsDayNp} {BS_MONTHS_NP[currentMonth-1]} {currentYear}
                         </h4>
                         <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>
@@ -303,15 +303,15 @@ export default function Home() {
                         </div>
                       </div>
                       <button onClick={() => setSelectedDay(null)}
-                        style={{ background: 'rgba(255,255,255,0.05)', border: 'none', width: 28, height: 28, borderRadius: '50%', fontSize: 14,
+                        style={{ background: 'rgba(123,44,191,0.08)', border: 'none', width: 28, height: 28, borderRadius: '50%', fontSize: 14,
                           cursor: 'pointer', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifySelf: 'center', justifyContent: 'center' }}>✕</button>
                     </div>
 
                     <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
-                      <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: '8px 16px', border: '1px solid rgba(157,78,221,0.15)', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                      <div style={{ background: 'rgba(123,44,191,0.03)', borderRadius: 8, padding: '8px 16px', border: '1px solid var(--border)', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                         <FiMoon style={{ color: 'var(--primary)' }} /> <strong>Tithi:</strong> {selectedDay.tithi}
                       </div>
-                      <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: '8px 16px', border: '1px solid rgba(157,78,221,0.15)', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                      <div style={{ background: 'rgba(123,44,191,0.03)', borderRadius: 8, padding: '8px 16px', border: '1px solid var(--border)', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                         <FiCompass style={{ color: 'var(--primary)' }} /> <strong>Paksha:</strong> {selectedDay.paksha}
                       </div>
                     </div>
@@ -423,9 +423,9 @@ export default function Home() {
 
       {/* ── DAILY HOROSCOPE TEASER ─────────────────────────────────── */}
       <section className="section" style={{
-        background: 'radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.2), transparent 60%), #0e0921',
-        borderTop: '1px solid rgba(157, 78, 221, 0.15)',
-        borderBottom: '1px solid rgba(157, 78, 221, 0.15)'
+        background: 'radial-gradient(circle at 50% 50%, rgba(123, 44, 191, 0.08), transparent 70%), var(--card)',
+        borderTop: '1.5px solid var(--border)',
+        borderBottom: '1.5px solid var(--border)'
       }}>
         <div className="container text-center">
           <FiMoon size={56} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 10px var(--primary))', marginBottom: 16 }} />

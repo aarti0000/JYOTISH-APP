@@ -22,7 +22,7 @@
   height: 12px;
   border-radius: 50%;
   background: var(--success);
-  border: 2px solid rgba(21, 14, 40, 0.9);
+  border: 2px solid var(--card);
   box-shadow: 0 0 8px var(--success);
   z-index: 5;
 }
@@ -35,7 +35,7 @@
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #fff;
+  color: var(--text);
 }
 .astro-specs {
   display: flex;
@@ -68,7 +68,7 @@
   align-items: center;
   gap: 4px;
   font-size: 13px;
-  color: #fff;
+  color: var(--text);
 }
 .astro-price {
   font-size: 15px;
@@ -92,15 +92,10 @@
 .type-icon {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(123, 44, 191, 0.05);
   border: 1px solid rgba(157, 78, 221, 0.1);
   padding: 6px;
   border-radius: 50%;
   color: var(--primary);
   transition: all 0.2s ease;
-}
-.type-icon:hover {
-  background: var(--primary-light);
-  color: #fff;
-  border-color: var(--primary);
 }

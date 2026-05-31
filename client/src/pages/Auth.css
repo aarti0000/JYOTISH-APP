@@ -26,7 +26,7 @@
   font-size: 24px;
   font-weight: 800;
   margin: 12px 0 6px;
-  color: #fff;
+  color: var(--text);
   font-family: 'Cinzel', serif;
 }
 .auth-logo p {
@@ -61,7 +61,7 @@
 }
 .auth-footer a:hover {
   text-decoration: underline;
-  color: #fff;
+  color: var(--primary-dark);
 }
 
 .role-toggle {
