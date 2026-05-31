@@ -29,7 +29,7 @@ export default function Login() {
     <div className="auth-page">
       <div className="auth-card card">
         <div className="auth-logo">
-          <FiStar style={{ color: '#f59e0b', fontSize: 28 }} />
+          <FiStar style={{ color: 'var(--primary)', fontSize: 28, filter: 'drop-shadow(0 0 5px var(--primary))' }} />
           <h1>Welcome Back</h1>
           <p>Sign in to your AstroConnect account</p>
         </div>

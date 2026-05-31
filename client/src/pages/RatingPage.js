@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import toast from 'react-hot-toast';
-import { FiStar } from 'react-icons/fi';
+import { FiStar, FiCheckCircle } from 'react-icons/fi';
 
 export default function RatingPage() {
   const { appointmentId } = useParams();
@@ -39,7 +39,7 @@ export default function RatingPage() {
         rating,
         comment,
       });
-      toast.success('Thank you for your review! 🙏');
+      toast.success('Thank you for your review!');
       navigate('/dashboard');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to submit review');
@@ -55,12 +55,12 @@ export default function RatingPage() {
   const astrologer = appointment?.astrologer;
 
   const LABELS = { 1:'Poor', 2:'Fair', 3:'Good', 4:'Very Good', 5:'Excellent' };
-  const COLORS  = { 1:'#ef4444', 2:'#f97316', 3:'#eab308', 4:'#84cc16', 5:'#10b981' };
+  const COLORS  = { 1:'#ff4d6d', 2:'#ff9f1c', 3:'#ffb703', 4:'#aacc00', 5:'#70e000' };
 
   return (
     <div style={{
       minHeight: 'calc(100vh - 64px)',
-      background: 'linear-gradient(135deg, #f8f6ff 0%, #ede9fe 100%)',
+      background: 'transparent',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '40px 20px',
     }}>
@@ -69,8 +69,8 @@ export default function RatingPage() {
         {alreadyReviewed ? (
           /* Already reviewed */
           <div className="card" style={{ textAlign: 'center', padding: 40 }}>
-            <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
-            <h2 style={{ fontWeight: 800, fontSize: 22, marginBottom: 8 }}>
+            <FiCheckCircle size={56} style={{ color: 'var(--success)', marginBottom: 16, filter: 'drop-shadow(0 0 8px var(--success))' }} />
+            <h2 style={{ fontWeight: 800, fontSize: 22, marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
               Already Reviewed
             </h2>
             <p style={{ color: 'var(--text-muted)', marginBottom: 24 }}>
@@ -86,8 +86,8 @@ export default function RatingPage() {
 
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
-              <div style={{ fontSize: 48, marginBottom: 10 }}>🙏</div>
-              <h2 style={{ fontWeight: 800, fontSize: 22, marginBottom: 6 }}>
+              <FiStar size={44} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 8px var(--primary))', marginBottom: 12 }} />
+              <h2 style={{ fontWeight: 800, fontSize: 22, marginBottom: 6, fontFamily: "'Cinzel', serif" }}>
                 How was your consultation?
               </h2>
               <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
@@ -98,7 +98,7 @@ export default function RatingPage() {
             {/* Astrologer info */}
             {astrologer && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 14,
-                padding: '14px 16px', background: 'var(--bg)',
+                padding: '14px 16px', background: 'rgba(9, 5, 20, 0.5)',
                 borderRadius: 12, border: '1px solid var(--border)', marginBottom: 24 }}>
                 <div className="avatar" style={{ width: 52, height: 52, fontSize: 18, flexShrink: 0 }}>
                   {astrologer.user?.avatar
@@ -106,13 +106,13 @@ export default function RatingPage() {
                     : astrologer.user?.name?.[0]}
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: 16 }}>
+                  <div style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>
                     {astrologer.user?.name}
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>
                     {appointment.type?.toUpperCase()} · {appointment.date} · {appointment.startTime}
                   </div>
-                  <div style={{ display: 'flex', gap: 6, marginTop: 4, flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
                     {astrologer.specializations?.slice(0,2).map(s => (
                       <span key={s} className="badge badge-purple">{s}</span>
                     ))}
@@ -124,7 +124,7 @@ export default function RatingPage() {
             {/* Star rating */}
             <div style={{ marginBottom: 24 }}>
               <label style={{ fontSize: 14, fontWeight: 600,
-                display: 'block', marginBottom: 12, color: 'var(--text)' }}>
+                display: 'block', marginBottom: 12, color: 'var(--text-muted)' }}>
                 Rate your experience
               </label>
               <div style={{ display: 'flex', gap: 8, justifyContent: 'center',
@@ -139,7 +139,7 @@ export default function RatingPage() {
                       fontSize: 44, padding: '4px 6px',
                       transition: 'transform 0.1s',
                       transform: (hovered || rating) >= star ? 'scale(1.15)' : 'scale(1)',
-                      color: (hovered || rating) >= star ? '#f59e0b' : '#d1d5db',
+                      color: (hovered || rating) >= star ? 'var(--secondary)' : '#443f5d',
                     }}>
                     ★
                   </button>
@@ -148,11 +148,12 @@ export default function RatingPage() {
 
               {/* Rating label */}
               {(hovered > 0 || rating > 0) && (
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: 'center', marginTop: 12 }}>
                   <span style={{
-                    fontSize: 15, fontWeight: 700,
+                    fontSize: 14, fontWeight: 700,
                     color: COLORS[hovered || rating],
                     background: COLORS[hovered || rating] + '20',
+                    border: '1px solid ' + COLORS[hovered || rating] + '40',
                     padding: '4px 16px', borderRadius: 20,
                   }}>
                     {LABELS[hovered || rating]}
@@ -185,13 +186,13 @@ export default function RatingPage() {
               <button className="btn btn-primary" onClick={handleSubmit}
                 disabled={submitting || rating === 0}
                 style={{ flex: 2, justifyContent: 'center', padding: 12, fontSize: 15 }}>
-                {submitting ? 'Submitting...' : '⭐ Submit Review'}
+                {submitting ? 'Submitting...' : 'Submit Review'}
               </button>
             </div>
 
             {rating === 0 && (
               <p style={{ textAlign: 'center', fontSize: 12,
-                color: 'var(--text-muted)', marginTop: 10 }}>
+                color: 'var(--text-muted)', marginTop: 12 }}>
                 Please select at least 1 star to submit
               </p>
             )}

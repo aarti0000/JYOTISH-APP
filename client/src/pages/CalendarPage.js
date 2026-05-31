@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiCalendar, FiMoon, FiCompass, FiAward, FiSliders } from 'react-icons/fi';
 
 const BS_MONTHS_NP = ['बैशाख','जेठ','असार','साउन','भदौ','असोज','कार्तिक','मंसिर','पुस','माघ','फागुन','चैत्र'];
 const BS_MONTHS_EN = ['Baisakh','Jestha','Ashadh','Shrawan','Bhadra','Ashwin','Kartik','Mangsir','Poush','Magh','Falgun','Chaitra'];
@@ -8,10 +8,10 @@ const DAYS_NP      = ['आइत','सोम','मंगल','बुध','बि
 const DAYS_EN      = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 const TYPE_COLORS = {
-  public:    { bg:'#fee2e2', color:'#991b1b', border:'#fca5a5', label:'Public Holiday' },
-  religious: { bg:'#fef3c7', color:'#92400e', border:'#fcd34d', label:'Religious' },
-  festival:  { bg:'#ede9fe', color:'#5b21b6', border:'#c4b5fd', label:'Festival' },
-  other:     { bg:'#f0fdf4', color:'#166534', border:'#86efac', label:'Other' },
+  public:    { bg: 'rgba(255, 77, 109, 0.08)', color: '#ff758f', border: 'rgba(255, 77, 109, 0.25)', label: 'Public Holiday' },
+  religious: { bg: 'rgba(255, 158, 0, 0.08)', color: '#ffb703', border: 'rgba(255, 158, 0, 0.25)', label: 'Religious' },
+  festival:  { bg: 'rgba(157, 78, 221, 0.08)', color: '#c8b6ff', border: 'rgba(157, 78, 221, 0.25)', label: 'Festival' },
+  other:     { bg: 'rgba(56, 176, 0, 0.08)', color: '#70e000', border: 'rgba(56, 176, 0, 0.25)', label: 'Other' },
 };
 
 export default function CalendarPage() {
@@ -27,8 +27,6 @@ export default function CalendarPage() {
   const [allFestivals, setAllFestivals]         = useState({});
   const [festLoading, setFestLoading]           = useState(false);
   const [openFestMonth, setOpenFestMonth]       = useState(null);
-
- 
 
   // Load today
   useEffect(() => {
@@ -77,62 +75,60 @@ export default function CalendarPage() {
     today.bs.month === currentMonth &&
     today.bs.day === day.bsDay;
 
- 
-
   return (
     <div className="page">
       <div className="container">
 
         {/* ── Header ──────────────────────────────────────────────── */}
-        <div style={{ textAlign:'center', marginBottom:28 }}>
-          <div style={{ fontSize:48, marginBottom:8 }}>📅</div>
-          <h1 style={{ fontSize:28, fontWeight:800, color:'var(--primary)', marginBottom:6 }}>
-            Nepali Calendar — BS 2083
+        <div style={{ textAlign: 'center', marginBottom: 36 }}>
+          <FiCalendar size={56} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 10px var(--primary))', marginBottom: 16 }} />
+          <h1 style={{ fontSize: 32, fontWeight: 800, color: '#fff', marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
+            Nepali Calendar — BS {currentYear}
           </h1>
-          <p style={{ color:'var(--text-muted)', fontSize:14 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
             Bikram Sambat calendar with festivals, tithis and public holidays
           </p>
           {today && (
-            <div style={{ display:'inline-flex', gap:10, alignItems:'center', marginTop:10,
-              background:'var(--primary-light)', borderRadius:20, padding:'8px 20px' }}>
-              <span style={{ fontWeight:700, color:'var(--primary)' }}>
-                📆 Today: {today.bs.dayNp} {today.bs.monthNp} {today.bs.year} BS
+            <div style={{ display: 'inline-flex', gap: 10, alignItems: 'center', marginTop: 12,
+              background: 'var(--primary-light)', border: '1px solid rgba(157, 78, 221, 0.25)', borderRadius: 20, padding: '8px 20px' }}>
+              <span style={{ fontWeight: 700, color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+                <FiCalendar style={{ color: 'var(--primary)' }} /> Today: {today.bs.dayNp} {today.bs.monthNp} {today.bs.year} BS
               </span>
-              <span style={{ color:'var(--text-muted)', fontSize:13 }}>({today.ad})</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>({today.ad})</span>
             </div>
           )}
         </div>
 
         {/* ── Today's panchang ────────────────────────────────────── */}
         {today && (
-          <div className="card" style={{ marginBottom:24,
-            background:'linear-gradient(135deg,#1e1b4b,#4c1d95)', color:'#fff' }}>
-            <h3 style={{ fontWeight:700, marginBottom:14, color:'#e9d5ff' }}>
+          <div className="card" style={{ marginBottom: 32,
+            background: 'radial-gradient(circle at 50% 50%, rgba(157,78,221,0.15), transparent 70%), #0e0921', color: '#fff' }}>
+            <h3 style={{ fontWeight: 800, marginBottom: 16, color: '#fff', fontFamily: "'Cinzel', serif" }}>
               Today's Panchang — आजको पञ्चाङ्ग
             </h3>
-            <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               {[
-                { label:'BS Date',  value:`${today.bs.dayNp} ${today.bs.monthNp} ${today.bs.year}`, icon:'📅' },
-                { label:'AD Date',  value:today.ad,    icon:'🗓️' },
-                { label:'Tithi',    value:today.tithi, icon:'🌙' },
-                { label:'Paksha',   value:today.paksha,icon:'☽'  },
+                { label: 'BS Date',  value: `${today.bs.dayNp} ${today.bs.monthNp} ${today.bs.year}`, icon: <FiCalendar /> },
+                { label: 'AD Date',  value: today.ad,    icon: <FiCalendar /> },
+                { label: 'Tithi',    value: today.tithi, icon: <FiMoon /> },
+                { label: 'Paksha',   value: today.paksha, icon: <FiCompass /> },
               ].map(item => (
-                <div key={item.label} style={{ flex:1, minWidth:140,
-                  background:'rgba(255,255,255,0.1)', borderRadius:10, padding:'12px 14px' }}>
-                  <div style={{ fontSize:18, marginBottom:4 }}>{item.icon}</div>
-                  <div style={{ fontSize:11, color:'#a78bfa' }}>{item.label}</div>
-                  <div style={{ fontWeight:700, fontSize:13, color:'#fff', marginTop:2 }}>{item.value}</div>
+                <div key={item.label} style={{ flex: 1, minWidth: 140,
+                  background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(157,78,221,0.1)', borderRadius: 10, padding: '12px 14px' }}>
+                  <div style={{ fontSize: 18, marginBottom: 6, color: 'var(--primary)' }}>{item.icon}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{item.label}</div>
+                  <div style={{ fontWeight: 700, fontSize: 13, color: '#fff', marginTop: 4 }}>{item.value}</div>
                 </div>
               ))}
             </div>
             {today.festivals.length > 0 && (
-              <div style={{ marginTop:12 }}>
-                <div style={{ fontSize:12, color:'#a78bfa', marginBottom:6 }}>Today's Events:</div>
-                <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-                  {today.festivals.map((f,i) => (
-                    <span key={i} style={{ background:'rgba(255,255,255,0.15)', borderRadius:20,
-                      padding:'4px 12px', fontSize:13, color:'#fff' }}>
-                      {f.icon} {f.name}
+              <div style={{ marginTop: 16 }}>
+                <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>Today's Events:</div>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  {today.festivals.map((f, i) => (
+                    <span key={i} style={{ background: 'rgba(157,78,221,0.15)', border: '1px solid rgba(157,78,221,0.2)', borderRadius: 20,
+                      padding: '4px 12px', fontSize: 13, color: '#fff' }}>
+                      {f.name}
                     </span>
                   ))}
                 </div>
@@ -142,16 +138,16 @@ export default function CalendarPage() {
         )}
 
         {/* ── Tabs ────────────────────────────────────────────────── */}
-        <div style={{ display:'flex', gap:8, marginBottom:24, flexWrap:'wrap' }}>
+        <div style={{ display: 'flex', gap: 10, marginBottom: 28, flexWrap: 'wrap' }}>
           {[
-            { key:'calendar',  label:'📅 Calendar' },
-            { key:'festivals', label:'🎉 Festivals 2083' },
-           
+            { key: 'calendar',  label: 'Calendar', icon: <FiCalendar /> },
+            { key: 'festivals', label: 'Festivals 2083', icon: <FiAward /> },
           ].map(t => (
             <button key={t.key}
               className={'btn ' + (tab===t.key ? 'btn-primary' : 'btn-secondary')}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
               onClick={() => setTab(t.key)}>
-              {t.label}
+              {t.icon} {t.label}
             </button>
           ))}
         </div>
@@ -163,27 +159,27 @@ export default function CalendarPage() {
           <div className="card">
 
             {/* Month nav */}
-            <div style={{ display:'flex', alignItems:'center',
-              justifyContent:'space-between', marginBottom:20, flexWrap:'wrap', gap:10 }}>
+            <div style={{ display: 'flex', alignItems: 'center',
+              justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
               <button className="btn btn-secondary" onClick={prevMonth}>
-                <FiChevronLeft />
+                <FiChevronLeft size={18} />
               </button>
-              <div style={{ textAlign:'center' }}>
-                <h2 style={{ fontWeight:800, fontSize:22, color:'var(--primary)', margin:0 }}>
+              <div style={{ textAlign: 'center' }}>
+                <h2 style={{ fontWeight: 800, fontSize: 24, color: '#fff', margin: 0, fontFamily: "'Cinzel', serif" }}>
                   {BS_MONTHS_NP[currentMonth-1]} {currentYear}
                 </h2>
-                <div style={{ fontSize:13, color:'var(--text-muted)', marginTop:2 }}>
+                <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>
                   {BS_MONTHS_EN[currentMonth-1]} {currentYear} BS
                   {calendar && <span> · {calendar.adMonths}</span>}
                 </div>
               </div>
-              <div style={{ display:'flex', gap:8 }}>
+              <div style={{ display: 'flex', gap: 10 }}>
                 <button className="btn btn-secondary"
-                  style={{ fontSize:12, padding:'8px 14px' }} onClick={goToToday}>
+                  style={{ fontSize: 13, padding: '10px 16px' }} onClick={goToToday}>
                   Today
                 </button>
                 <button className="btn btn-secondary" onClick={nextMonth}>
-                  <FiChevronRight />
+                  <FiChevronRight size={18} />
                 </button>
               </div>
             </div>
@@ -197,21 +193,22 @@ export default function CalendarPage() {
             ) : (
               <>
                 {/* Day headers */}
-                <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:2, marginBottom:6 }}>
-                  {DAYS_NP.map((d,i) => (
-                    <div key={d} style={{ textAlign:'center', padding:'8px 4px',
-                      fontWeight:700, fontSize:12,
-                      color: i===6 ? '#ef4444' : i===0 ? '#f59e0b' : 'var(--text-muted)' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 8, marginBottom: 8 }}>
+                  {DAYS_NP.map((d, i) => (
+                    <div key={d} style={{ textAlign: 'center', padding: '10px 4px',
+                      fontWeight: 700, fontSize: 13,
+                      background: 'rgba(255,255,255,0.02)', borderRadius: 8,
+                      color: i===6 ? '#ff4d6d' : i===0 ? 'var(--secondary)' : 'var(--text-muted)' }}>
                       {d}
-                      <div style={{ fontSize:10, fontWeight:400 }}>{DAYS_EN[i]}</div>
+                      <div style={{ fontSize: 10, fontWeight: 400, opacity: 0.7 }}>{DAYS_EN[i]}</div>
                     </div>
                   ))}
                 </div>
 
                 {/* Days grid */}
-                <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:3 }}>
-                  {Array.from({ length: calendar.startDayOfWeek }).map((_,i) => (
-                    <div key={'emp'+i} style={{ minHeight:70 }} />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 8 }}>
+                  {Array.from({ length: calendar.startDayOfWeek }).map((_, i) => (
+                    <div key={'emp'+i} style={{ minHeight: 70, opacity: 0, pointerEvents: 'none' }} />
                   ))}
 
                   {calendar.days.map(day => {
@@ -224,31 +221,36 @@ export default function CalendarPage() {
                         style={{
                           minHeight: 70,
                           border: '1.5px solid',
-                          borderColor: todayDay ? 'var(--primary)' : selected ? '#f59e0b' : 'var(--border)',
-                          borderRadius: 8, padding: '5px 5px', cursor: 'pointer',
-                          background: todayDay ? 'var(--primary)' : selected ? '#fffbeb' : hasFest ? '#faf5ff' : '#fff',
-                          transition: 'all 0.15s',
+                          borderColor: todayDay ? 'var(--primary)' : selected ? 'var(--secondary)' : 'rgba(157,78,221,0.15)',
+                          borderRadius: 10, padding: '8px', cursor: 'pointer',
+                          background: todayDay ? 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)'
+                            : selected ? 'rgba(255, 158, 0, 0.1)'
+                            : hasFest ? 'rgba(157, 78, 221, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                          transition: 'all 0.2s ease',
+                          boxShadow: todayDay ? 'var(--glow)' : 'none',
+                        }}
+                        onMouseEnter={e => {
+                          if(!todayDay) e.currentTarget.style.borderColor = selected ? 'var(--secondary)' : 'var(--primary)';
+                        }}
+                        onMouseLeave={e => {
+                          if(!todayDay) e.currentTarget.style.borderColor = selected ? 'var(--secondary)' : 'rgba(157,78,221,0.15)';
                         }}>
                         {/* BS day number */}
-                        <div style={{ fontWeight:800, fontSize:15,
-                          color: todayDay ? '#fff' : day.isHoliday ? '#ef4444' : 'var(--text)' }}>
+                        <div style={{ fontWeight: 800, fontSize: 16,
+                          color: todayDay ? '#fff' : day.isHoliday ? '#ff4d6d' : 'var(--text)' }}>
                           {day.bsDayNp}
                         </div>
                         {/* AD day number */}
-                        <div style={{ fontSize:10,
-                          color: todayDay ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)' }}>
+                        <div style={{ fontSize: 10, marginTop: 2,
+                          color: todayDay ? 'rgba(255,255,255,0.75)' : 'var(--text-muted)' }}>
                           {day.adDay}
                         </div>
-                        {/* Festival icons */}
+                        {/* Festival dots */}
                         {hasFest && (
-                          <div style={{ display:'flex', gap:1, flexWrap:'wrap', marginTop:2 }}>
-                            {day.festivals.slice(0,2).map((f,i) => (
-                              <span key={i} title={f.name} style={{ fontSize:10 }}>{f.icon}</span>
-                            ))}
-                            {day.festivals.length > 2 && (
-                              <span style={{ fontSize:9, color:'var(--primary)', fontWeight:700 }}>
-                                +{day.festivals.length-2}
-                              </span>
+                          <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', marginTop: 6 }}>
+                            <div style={{ width: 6, height: 6, borderRadius: '50%', background: todayDay ? '#fff' : 'var(--primary)' }} />
+                            {day.festivals.length > 1 && (
+                              <div style={{ width: 6, height: 6, borderRadius: '50%', background: todayDay ? '#fff' : 'var(--secondary)' }} />
                             )}
                           </div>
                         )}
@@ -258,80 +260,89 @@ export default function CalendarPage() {
                 </div>
 
                 {/* Legend */}
-                <div style={{ display:'flex', gap:16, marginTop:14,
-                  flexWrap:'wrap', fontSize:12, color:'var(--text-muted)' }}>
-                  <span style={{ display:'flex', alignItems:'center', gap:4 }}>
-                    <div style={{ width:10, height:10, borderRadius:2, background:'var(--primary)' }} />
+                <div style={{ display: 'flex', gap: 20, marginTop: 20,
+                  flexWrap: 'wrap', fontSize: 12, color: 'var(--text-muted)', borderTop: '1px solid rgba(157, 78, 221, 0.1)', paddingTop: 16 }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--primary)' }} />
                     Today
                   </span>
-                  <span style={{ display:'flex', alignItems:'center', gap:4 }}>
-                    <span style={{ color:'#ef4444', fontWeight:700 }}>●</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff4d6d' }} />
                     Holiday / Saturday
                   </span>
-                  <span>🎉 Festival</span>
-                  <span style={{ marginLeft:'auto', fontStyle:'italic' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--secondary)' }} />
+                    Festival
+                  </span>
+                  <span style={{ marginLeft: 'auto', fontStyle: 'italic' }}>
                     Click any date for details
                   </span>
                 </div>
 
                 {/* Selected day detail */}
                 {selectedDay && (
-                  <div style={{ marginTop:16, padding:16, background:'#fffbeb',
-                    borderRadius:12, border:'2px solid #f59e0b' }}>
-                    <div style={{ display:'flex', justifyContent:'space-between',
-                      alignItems:'flex-start', marginBottom:12 }}>
+                  <div style={{
+                    marginTop: 20, padding: 24,
+                    background: 'rgba(21, 14, 40, 0.9)',
+                    borderRadius: 12,
+                    border: '1.5px solid var(--secondary)',
+                    boxShadow: '0 0 20px rgba(255, 158, 0, 0.15)',
+                    backdropFilter: 'blur(8px)'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between',
+                      alignItems: 'flex-start', marginBottom: 16 }}>
                       <div>
-                        <h4 style={{ fontWeight:800, fontSize:16, margin:0 }}>
+                        <h4 style={{ fontWeight: 800, fontSize: 18, margin: 0, color: '#fff', fontFamily: "'Cinzel', serif" }}>
                           {selectedDay.bsDayNp} {BS_MONTHS_NP[currentMonth-1]} {currentYear} BS
                         </h4>
-                        <p style={{ fontSize:13, color:'var(--text-muted)', margin:'4px 0 0' }}>
+                        <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0' }}>
                           {selectedDay.adDate} · {selectedDay.dayNameNp} ({selectedDay.dayNameEn})
                         </p>
                       </div>
                       <button onClick={() => setSelectedDay(null)}
-                        style={{ background:'none', border:'none', fontSize:20,
-                          cursor:'pointer', color:'var(--text-muted)', padding:0 }}>
+                        style={{ background: 'rgba(255,255,255,0.05)', border: 'none', width: 28, height: 28, borderRadius: '50%', fontSize: 14,
+                          cursor: 'pointer', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifySelf: 'center', justifyContent: 'center' }}>
                         ✕
                       </button>
                     </div>
 
                     {/* Tithi and Paksha */}
-                    <div style={{ display:'flex', gap:10, marginBottom:14, flexWrap:'wrap' }}>
+                    <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
                       {[
-                        { label:'Tithi',  value:selectedDay.tithi,  icon:'🌙' },
-                        { label:'Paksha', value:selectedDay.paksha, icon:'☽'  },
+                        { label: 'Tithi',  value: selectedDay.tithi,  icon: <FiMoon /> },
+                        { label: 'Paksha', value: selectedDay.paksha, icon: <FiCompass /> },
                       ].map(item => (
-                        <div key={item.label} style={{ background:'#fff', borderRadius:8,
-                          padding:'8px 14px', border:'1px solid var(--border)', fontSize:13 }}>
-                          {item.icon} <strong>{item.label}:</strong> {item.value}
+                        <div key={item.label} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(157,78,221,0.15)', borderRadius: 8,
+                          padding: '8px 16px', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                          <span style={{ color: 'var(--primary)' }}>{item.icon}</span> <strong>{item.label}:</strong> {item.value}
                         </div>
                       ))}
                     </div>
 
                     {/* Festivals */}
                     {selectedDay.festivals.length === 0 ? (
-                      <p style={{ fontSize:14, color:'var(--text-muted)', margin:0 }}>
+                      <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: 0 }}>
                         No special events on this day.
                       </p>
                     ) : (
-                      <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
-                        {selectedDay.festivals.map((f,i) => {
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {selectedDay.festivals.map((f, i) => {
                           const c = TYPE_COLORS[f.type] || TYPE_COLORS.other;
                           return (
-                            <div key={i} style={{ display:'flex', alignItems:'center', gap:12,
-                              padding:'12px 14px', borderRadius:10,
-                              background:c.bg, border:'1.5px solid '+c.border }}>
-                              <span style={{ fontSize:26 }}>{f.icon}</span>
-                              <div style={{ flex:1 }}>
-                                <div style={{ fontWeight:700, fontSize:15, color:c.color }}>
+                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12,
+                              padding: '12px 16px', borderRadius: 8,
+                              background: c.bg, border: '1px solid ' + c.border }}>
+                              <FiAward size={20} style={{ color: c.color }} />
+                              <div style={{ flex: 1 }}>
+                                <div style={{ fontWeight: 700, fontSize: 14, color: c.color }}>
                                   {f.name}
                                 </div>
-                                <div style={{ fontSize:13, color:c.color, opacity:0.8 }}>
+                                <div style={{ fontSize: 12, color: c.color, opacity: 0.8 }}>
                                   {f.np}
                                 </div>
                               </div>
-                              <span style={{ fontSize:11, fontWeight:700,
-                                color:c.color, textTransform:'uppercase', opacity:0.8 }}>
+                              <span style={{ fontSize: 10, fontWeight: 700,
+                                color: c.color, textTransform: 'uppercase', letterSpacing: 0.5 }}>
                                 {c.label}
                               </span>
                             </div>
@@ -351,11 +362,11 @@ export default function CalendarPage() {
         ════════════════════════════════════════════════════════════ */}
         {tab === 'festivals' && (
           <div>
-            <div style={{ marginBottom:20 }}>
-              <h2 style={{ fontWeight:800, fontSize:22, color:'var(--primary)', marginBottom:4 }}>
-                Festivals & Holidays — BS 2083
+            <div style={{ marginBottom: 24 }}>
+              <h2 style={{ fontWeight: 800, fontSize: 24, color: '#fff', marginBottom: 6, fontFamily: "'Cinzel', serif" }}>
+                Festivals & Holidays — BS {currentYear}
               </h2>
-              <p style={{ color:'var(--text-muted)', fontSize:14 }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
                 Click any month to see its festivals and events
               </p>
             </div>
@@ -367,50 +378,44 @@ export default function CalendarPage() {
                 <p>Could not load festivals. Please refresh the page.</p>
               </div>
             ) : (
-              <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {Object.entries(allFestivals).map(([monthNum, data]) => {
                   const isOpen = openFestMonth === monthNum;
                   return (
-                    <div key={monthNum} className="card" style={{ padding:0, overflow:'hidden' }}>
+                    <div key={monthNum} className="card" style={{ padding: 0, overflow: 'hidden' }}>
 
                       {/* Month header — clickable */}
                       <button
                         onClick={() => setOpenFestMonth(isOpen ? null : monthNum)}
-                        style={{ width:'100%', background:'none', border:'none',
-                          cursor:'pointer', padding:'16px 20px',
-                          display:'flex', alignItems:'center', justifyContent:'space-between',
-                          textAlign:'left' }}>
-                        <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-                          <div style={{ width:40, height:40, borderRadius:10,
-                            background:'var(--primary-light)', display:'flex',
-                            alignItems:'center', justifyContent:'center',
-                            fontWeight:800, fontSize:15, color:'var(--primary)' }}>
+                        style={{ width: '100%', background: 'none', border: 'none',
+                          cursor: 'pointer', padding: '16px 20px',
+                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                          textAlign: 'left' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                          <div style={{ width: 40, height: 40, borderRadius: 10,
+                            background: 'var(--primary-light)', border: '1px solid rgba(157, 78, 221, 0.25)', display: 'flex',
+                            alignItems: 'center', justifyContent: 'center',
+                            fontWeight: 800, fontSize: 15, color: '#fff' }}>
                             {monthNum}
                           </div>
                           <div>
-                            <div style={{ fontWeight:700, fontSize:16, color:'var(--text)' }}>
+                            <div style={{ fontWeight: 700, fontSize: 16, color: '#fff', fontFamily: "'Cinzel', serif" }}>
                               {data.monthNp} ({data.monthEn})
                             </div>
-                            <div style={{ fontSize:12, color:'var(--text-muted)', marginTop:2 }}>
+                            <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
                               {data.festivals.length} event{data.festivals.length !== 1 ? 's' : ''}
                               {' · '}
                               {data.festivals.filter(f=>f.type==='public').length > 0 &&
-                                <span style={{ color:'#ef4444' }}>
+                                <span style={{ color: '#ff758f', fontWeight: 600 }}>
                                   {data.festivals.filter(f=>f.type==='public').length} public holiday{data.festivals.filter(f=>f.type==='public').length!==1?'s':''}
                                 </span>
                               }
                             </div>
                           </div>
                         </div>
-                        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-                          {/* Festival icons preview */}
-                          <div style={{ display:'flex', gap:4 }}>
-                            {data.festivals.slice(0,4).map((f,i) => (
-                              <span key={i} style={{ fontSize:16 }}>{f.icon}</span>
-                            ))}
-                          </div>
-                          <span style={{ fontSize:18, color:'var(--text-muted)',
-                            transform: isOpen ? 'rotate(90deg)' : 'none', transition:'0.2s' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                          <span style={{ fontSize: 18, color: 'var(--text-muted)',
+                            transform: isOpen ? 'rotate(90deg)' : 'none', transition: '0.2s' }}>
                             ›
                           </span>
                         </div>
@@ -418,28 +423,28 @@ export default function CalendarPage() {
 
                       {/* Festival list — shown when open */}
                       {isOpen && (
-                        <div style={{ borderTop:'1px solid var(--border)', padding:'12px 20px',
-                          display:'flex', flexDirection:'column', gap:8 }}>
+                        <div style={{ borderTop: '1px solid var(--border)', padding: '16px 20px',
+                          display: 'flex', flexDirection: 'column', gap: 10 }}>
                           {data.festivals.map((f, i) => {
                             const c = TYPE_COLORS[f.type] || TYPE_COLORS.other;
                             return (
-                              <div key={i} style={{ display:'flex', alignItems:'center', gap:12,
-                                padding:'12px 14px', borderRadius:10,
-                                background:c.bg, border:'1.5px solid '+c.border }}>
-                                <span style={{ fontSize:26, flexShrink:0 }}>{f.icon}</span>
-                                <div style={{ flex:1 }}>
-                                  <div style={{ fontWeight:700, fontSize:15, color:c.color }}>
+                              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12,
+                                padding: '12px 16px', borderRadius: 8,
+                                background: c.bg, border: '1px solid ' + c.border }}>
+                                <FiAward size={20} style={{ color: c.color, flexShrink: 0 }} />
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ fontWeight: 700, fontSize: 14, color: c.color }}>
                                     {f.name}
                                   </div>
-                                  <div style={{ fontSize:13, color:c.color, opacity:0.8 }}>
+                                  <div style={{ fontSize: 12, color: c.color, opacity: 0.8 }}>
                                     {f.np}
                                   </div>
-                                  <div style={{ fontSize:12, color:c.color, opacity:0.6, marginTop:2 }}>
+                                  <div style={{ fontSize: 11, color: c.color, opacity: 0.6, marginTop: 4 }}>
                                     {f.bd} {data.monthNp} {f.by} BS
                                   </div>
                                 </div>
-                                <span style={{ fontSize:11, fontWeight:700, textTransform:'uppercase',
-                                  color:c.color, opacity:0.8, flexShrink:0 }}>
+                                <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase',
+                                  color: c.color, opacity: 0.8, flexShrink: 0, letterSpacing: 0.5 }}>
                                   {c.label}
                                 </span>
                               </div>
@@ -459,4 +464,3 @@ export default function CalendarPage() {
     </div>
   );
 }
-              

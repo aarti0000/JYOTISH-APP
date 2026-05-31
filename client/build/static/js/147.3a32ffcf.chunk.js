@@ -1,0 +1,1 @@
+(globalThis.webpackChunkjyotish_client=globalThis.webpackChunkjyotish_client||[]).push([[147],{959(){},457(){}}]);

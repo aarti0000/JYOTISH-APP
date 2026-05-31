@@ -77,7 +77,7 @@ export default function BookAppointment() {
     <div className="page">
       <div className="container" style={{ maxWidth: 700 }}>
         <h1 style={{ fontSize: 24, fontWeight: 800, marginBottom: 8 }}>Book Consultation</h1>
-        <p className="text-muted mb-2">with {astrologer.user?.name} — ₹{astrologer.pricePerMinute}/min</p>
+        <p className="text-muted mb-2">with {astrologer.user?.name} — Rs. {astrologer.pricePerMinute}/min</p>
 
         {/* Consultation type */}
         <div className="card" style={{ marginBottom: 20 }}>
@@ -176,7 +176,7 @@ export default function BookAppointment() {
               </div>
               <div style={{ textAlign: 'right' }}>
                 <strong style={{ fontSize: 20, color: 'var(--primary)' }}>
-                  ₹{astrologer.pricePerMinute * 30}
+                  Rs. {astrologer.pricePerMinute * 30}
                 </strong>
                 <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Total</div>
               </div>

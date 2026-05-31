@@ -296,7 +296,7 @@ export default function ConsultationRoom() {
   if (error) return (
     <div style={{ display:'flex', alignItems:'center', justifyContent:'center',
       height:'calc(100vh - 64px)', flexDirection:'column', gap:16 }}>
-      <div style={{ fontSize:48 }}>❌</div>
+      <FiPhoneOff size={48} style={{ color: 'var(--danger)' }} />
       <h2 style={{ color:'var(--danger)' }}>Could not load consultation</h2>
       <p style={{ color:'var(--text-muted)' }}>{error}</p>
       <button className="btn btn-primary" onClick={() => navigate('/dashboard')}>
@@ -322,8 +322,8 @@ export default function ConsultationRoom() {
           display:'flex', alignItems:'center', justifyContent:'center',
           zIndex:1000, flexDirection:'column', gap:24 }}>
           <div style={{ textAlign:'center' }}>
-            <div style={{ fontSize:72, marginBottom:12 }}>
-              {type === 'video' ? '📹' : '📞'}
+            <div style={{ marginBottom:16, color: 'var(--primary)' }}>
+              {type === 'video' ? <FiVideo size={56} /> : <FiPhone size={56} />}
             </div>
             <h2 style={{ color:'#fff', fontSize:24, marginBottom:8 }}>
               Incoming {type === 'video' ? 'Video' : 'Voice'} Call
@@ -359,7 +359,7 @@ export default function ConsultationRoom() {
           <div>
             <strong style={{ color:'#fff' }}>{otherParty?.name}</strong>
             <div style={{ fontSize:12, color:'#a78bfa' }}>
-              {type === 'video' ? '📹 Video' : type === 'call' ? '📞 Voice' : '💬 Chat'} Consultation
+              {type === 'video' ? 'Video' : type === 'call' ? 'Voice' : 'Chat'} Consultation
             </div>
           </div>
         </div>
@@ -398,7 +398,7 @@ export default function ConsultationRoom() {
               <div style={{ position:'absolute', inset:0, display:'flex',
                 alignItems:'center', justifyContent:'center',
                 flexDirection:'column', background:'rgba(0,0,0,0.7)', gap:20 }}>
-                <div style={{ fontSize:64 }}>📹</div>
+                <FiVideo size={56} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 10px var(--primary))' }} />
                 <p style={{ color:'#c4b5fd', fontSize:16, textAlign:'center' }}>
                   Click "Start Video Call" to call the other person
                 </p>
@@ -416,7 +416,7 @@ export default function ConsultationRoom() {
               <div style={{ position:'absolute', inset:0, display:'flex',
                 alignItems:'center', justifyContent:'center',
                 flexDirection:'column', background:'rgba(0,0,0,0.65)', gap:16 }}>
-                <div style={{ fontSize:48 }}>📞</div>
+                <FiPhone size={44} style={{ color: 'var(--secondary)', filter: 'drop-shadow(0 0 10px var(--secondary))' }} />
                 <p style={{ color:'#fbbf24', fontSize:16 }}>
                   Calling {otherParty?.name}...
                 </p>
@@ -677,7 +677,7 @@ function AstrologerNotes({ consultationId }) {
         onChange={e => setNotes(e.target.value)}
       />
       <button className="btn btn-primary" onClick={save}>
-        {saved ? '✅ Saved!' : 'Save Notes'}
+        {saved ? 'Saved!' : 'Save Notes'}
       </button>
     </div>
   );

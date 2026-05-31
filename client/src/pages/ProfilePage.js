@@ -226,7 +226,7 @@ export default function ProfilePage() {
                     onChange={e => setAstroForm({ ...astroForm, experience: e.target.value })} />
                 </div>
                 <div className="form-group">
-                  <label>Price per Minute (₹)</label>
+                  <label>Price per Minute (Rs.)</label>
                   <input className="input" type="number" value={astroForm.pricePerMinute}
                     onChange={e => setAstroForm({ ...astroForm, pricePerMinute: Number(e.target.value) })} />
                 </div>

@@ -9,7 +9,8 @@ export default function AstrologerCard({ astrologer }) {
   const { _id, user, bio, experience, specializations, pricePerMinute,
           rating, totalReviews, isOnline, consultationTypes } = astrologer;
 
-  const initials = user?.name?.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+  const initials = user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2) : '';
+
 
   return (
     <div className="astro-card">
@@ -36,7 +37,7 @@ export default function AstrologerCard({ astrologer }) {
           <span className="text-muted">({totalReviews})</span>
         </div>
         <div className="astro-price">
-          ₹{pricePerMinute}<small>/min</small>
+          Rs. {pricePerMinute}<small>/min</small>
         </div>
       </div>
       <div className="astro-types">

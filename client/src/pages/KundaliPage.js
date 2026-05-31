@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { FiCompass } from 'react-icons/fi';
 import './KundaliPage.css';
 
 const SIGNS = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo',
@@ -63,7 +64,7 @@ function KundaliWheel({ chartData, lagna }) {
           </div>
         ))}
         <div className="house-center">
-          <div style={{ fontSize: 11, color: '#7c3aed', fontWeight: 700 }}>Lagna</div>
+          <div style={{ fontSize: 11, color: 'var(--primary)', fontWeight: 700 }}>Lagna</div>
           <div style={{ fontSize: 13 }}>{SIGN_SYMBOLS[lagnaIndex]} {lagna}</div>
         </div>
       </div>
@@ -110,7 +111,7 @@ export default function KundaliPage() {
       });
       setKundalis(prev => [data.kundali, ...prev]);
       setSelected(data.kundali);
-      toast.success('Kundali generated! 🔮');
+      toast.success('Kundali generated!');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Generation failed');
     } finally {
@@ -123,7 +124,9 @@ export default function KundaliPage() {
   return (
     <div className="page">
       <div className="container">
-        <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6 }}>🔮 Kundali Chart</h1>
+        <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'Cinzel', serif" }}>
+          <FiCompass style={{ color: 'var(--primary)' }} /> Kundali Chart
+        </h1>
         <p className="text-muted mb-3">Generate and view your Vedic birth chart</p>
 
         <div className="grid-2" style={{ alignItems: 'start', gap: 28 }}>
@@ -164,7 +167,7 @@ export default function KundaliPage() {
                 </div>
                 <button className="btn btn-primary" type="submit" disabled={generating}
                   style={{ width: '100%', justifyContent: 'center', padding: 12 }}>
-                  {generating ? 'Generating...' : '🔮 Generate Kundali'}
+                  {generating ? 'Generating...' : 'Generate Kundali'}
                 </button>
               </form>
             </div>
@@ -263,7 +266,7 @@ export default function KundaliPage() {
               </>
             ) : (
               <div className="card flex-center" style={{ flexDirection: 'column', gap: 12, padding: 60, textAlign: 'center' }}>
-                <div style={{ fontSize: 48 }}>🔮</div>
+                <FiCompass size={48} style={{ color: 'var(--primary)' }} />
                 <h3>No Kundali yet</h3>
                 <p className="text-muted">Fill in the form to generate your Vedic birth chart</p>
               </div>

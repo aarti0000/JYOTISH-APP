@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { FiStar, FiMenu, FiX, FiUser, FiLogOut, FiCalendar, FiLayout } from 'react-icons/fi';
+import { FiStar, FiMenu, FiX, FiUser, FiLogOut, FiCalendar, FiLayout, FiCompass, FiMoon } from 'react-icons/fi';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -29,15 +29,15 @@ export default function Navbar() {
           <Link to="/astrologers" onClick={() => setMenuOpen(false)}>
             Find Astrologers
           </Link>
-          <Link to="/calendar" onClick={() => setMenuOpen(false)}>
-  📅 Calendar
-</Link>
-          <Link to="/horoscope" onClick={() => setMenuOpen(false)}>
-            🔮 Daily Horoscope
+          <Link to="/calendar" onClick={() => setMenuOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <FiCalendar /> Calendar
+          </Link>
+          <Link to="/horoscope" onClick={() => setMenuOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <FiMoon /> Daily Horoscope
           </Link>
           {user && (
-            <Link to="/kundali" onClick={() => setMenuOpen(false)}>
-              Kundali
+            <Link to="/kundali" onClick={() => setMenuOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              <FiCompass /> Kundali
             </Link>
           )}
           {!user && (
@@ -77,11 +77,11 @@ export default function Navbar() {
                   )}
                   {user.role === 'user' && (
                     <Link to="/kundali" onClick={() => setDropdownOpen(false)}>
-                      🔮 My Kundali
+                      <FiCompass /> My Kundali
                     </Link>
                   )}
                   <Link to="/horoscope" onClick={() => setDropdownOpen(false)}>
-                    ⭐ Daily Horoscope
+                    <FiMoon /> Daily Horoscope
                   </Link>
                   <button onClick={handleLogout}>
                     <FiLogOut /> Logout

@@ -1,61 +1,290 @@
+/* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #5b21b6 100%);
-  padding: 80px 0 60px;
+  background: radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.15), transparent 50%),
+              linear-gradient(135deg, #090514 0%, #170d35 100%);
+  padding: 100px 0 80px;
   color: white;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(157, 78, 221, 0.1);
 }
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-content {
+  text-align: left;
+}
+
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(255,255,255,0.15); border-radius: 20px;
-  padding: 6px 16px; font-size: 13px; font-weight: 600;
-  margin-bottom: 20px; color: #fbbf24;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--secondary);
 }
-.hero-title { font-size: clamp(32px, 5vw, 56px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
-.gradient-text { background: linear-gradient(90deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero-sub { font-size: 17px; color: #c4b5fd; max-width: 540px; margin: 0 auto 28px; }
-.hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn-lg { padding: 14px 28px; font-size: 15px; }
+
+.hero-title {
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  font-family: 'Cinzel', serif;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #fff 0%, var(--primary) 60%, #c8b6ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin-bottom: 32px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
 .hero-stats {
-  display: flex; gap: 40px; justify-content: center; margin-top: 48px;
+  display: flex;
+  gap: 48px;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
-.stat-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.stat-item strong { font-size: 26px; font-weight: 800; color: #fff; }
-.stat-item span { font-size: 12px; color: #a78bfa; }
 
-.section { padding: 60px 0; }
-.section-alt { background: #f5f3ff; }
-.section-title { font-size: 26px; font-weight: 700; color: var(--text); }
-
-.consult-type-card {
-  display: block; background: #fff; border-radius: 14px;
-  padding: 28px 24px; text-decoration: none; color: var(--text);
-  border: 2px solid transparent; box-shadow: var(--shadow);
-  transition: all 0.25s;
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.consult-type-card:hover { border-color: var(--c, var(--primary)); transform: translateY(-4px); }
-.consult-icon {
-  width: 56px; height: 56px; border-radius: 14px;
-  background: color-mix(in srgb, var(--c, #7c3aed) 15%, white);
-  color: var(--c, var(--primary));
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 14px;
+.stat-item strong {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  font-family: 'Cinzel', serif;
 }
-.consult-type-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-.consult-type-card p { font-size: 13px; color: var(--text-muted); }
-
-.spec-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
-.spec-chip {
-  padding: 10px 20px; border-radius: 24px;
-  background: #fff; border: 1.5px solid var(--primary-light);
-  color: var(--primary); font-size: 14px; font-weight: 600;
-  cursor: pointer; transition: all 0.2s;
+.stat-item span {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.spec-chip:hover { background: var(--primary); color: #fff; }
 
-.trust-card {
-  background: #fff; border-radius: 14px; padding: 28px 24px; box-shadow: var(--shadow);
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(157, 78, 221, 0.25) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.zodiac-wheel-img {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  animation: spin-slow 80s linear infinite;
+  z-index: 2;
+  filter: drop-shadow(0 0 30px rgba(157, 78, 221, 0.35));
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 48px;
+  }
+  .hero-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-cta {
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+    gap: 32px;
+  }
+  .zodiac-wheel-img {
+    max-width: 320px;
+  }
+}
+
+/* Sections */
+.section {
+  padding: 80px 0;
+}
+.section-alt {
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(157, 78, 221, 0.08);
+  border-bottom: 1px solid rgba(157, 78, 221, 0.08);
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 800;
   text-align: center;
+  margin-bottom: 12px;
+  color: #fff;
+  font-family: 'Cinzel', serif;
 }
-.trust-icon { color: var(--primary); margin-bottom: 14px; }
-.trust-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.trust-card p { font-size: 13px; color: var(--text-muted); }
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 48px;
+  font-size: 15px;
+}
+
+/* Consultation Cards */
+.consult-type-card {
+  display: block;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+.consult-type-card:hover {
+  border-color: var(--c, var(--primary));
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(157, 78, 221, 0.2);
+}
+.consult-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(157, 78, 221, 0.1);
+  color: var(--c, var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  border: 1.5px solid rgba(157, 78, 221, 0.2);
+  transition: all 0.3s ease;
+}
+
+.consult-type-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.consult-type-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Chips / Tags */
+.spec-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 36px;
+}
+.spec-chip {
+  padding: 10px 24px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.spec-chip:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+
+/* Trust Elements */
+.trust-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+.trust-icon {
+  color: var(--primary);
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+}
+.trust-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.trust-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Calendar styling updates */
+.calendar-wrapper {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.cal-day-cell {
+  background: rgba(9, 5, 20, 0.4);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.cal-day-cell:hover:not(.empty-day) {
+  border-color: var(--primary);
+  background: rgba(157, 78, 221, 0.1);
+  transform: scale(1.02);
+}
