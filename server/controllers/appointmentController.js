@@ -54,7 +54,7 @@ const createAppointment = asyncHandler(async (req, res) => {
   });
 
   // Send confirmation email (won't crash if email not configured)
-  await sendEmail({
+  sendEmail({
     to:      req.user.email,
     subject: 'Appointment Booked - JyotishApp Nepal',
     html: `
