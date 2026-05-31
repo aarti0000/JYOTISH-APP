@@ -59,7 +59,7 @@ export default function UserDashboard() {
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 12 }}>
           <div>
-            <h1 style={{ fontSize: 26, fontWeight: 800, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+            <h1 style={{ fontSize: 26, fontWeight: 800, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
               Welcome, {user?.name?.split(' ')[0]}
             </h1>
             <p className="text-muted">Manage your consultations and birth charts</p>

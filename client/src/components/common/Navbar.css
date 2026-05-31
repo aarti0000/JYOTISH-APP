@@ -1,13 +1,13 @@
 .navbar {
   height: 64px;
-  background: rgba(9, 5, 20, 0.85);
+  background: rgba(250, 247, 240, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(157, 78, 221, 0.15);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(32, 19, 53, 0.04);
 }
 
 .navbar-brand {
@@ -16,13 +16,12 @@
   gap: 8px;
   font-size: 22px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text);
   font-family: 'Cinzel', serif;
 }
 .brand-icon {
   color: var(--primary);
   font-size: 24px;
-  filter: drop-shadow(0 0 8px var(--primary));
 }
 .navbar-brand span strong {
   color: var(--primary);
@@ -42,7 +41,7 @@
   padding: 6px 0;
 }
 .navbar-links a:hover {
-  color: #fff;
+  color: var(--primary);
 }
 .navbar-links a svg {
   font-size: 16px;
@@ -80,14 +79,14 @@
 .user-name {
   font-size: 14px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text);
 }
 
 .dropdown {
   position: absolute;
   right: 0;
   top: calc(100% + 12px);
-  background: rgba(21, 14, 40, 0.95);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
   box-shadow: var(--shadow);
@@ -116,7 +115,7 @@
 }
 .dropdown a:hover, .dropdown button:hover {
   background: var(--primary-light);
-  color: #fff;
+  color: var(--primary);
 }
 
 .menu-toggle {
@@ -124,7 +123,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #fff;
+  color: var(--text);
   padding: 4px;
 }
 
@@ -135,7 +134,7 @@
     top: 64px;
     left: 0;
     right: 0;
-    background: rgba(9, 5, 20, 0.95);
+    background: rgba(250, 247, 240, 0.98);
     flex-direction: column;
     gap: 0;
     border-bottom: 1px solid var(--border);

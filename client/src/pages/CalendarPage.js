@@ -82,7 +82,7 @@ export default function CalendarPage() {
         {/* ── Header ──────────────────────────────────────────────── */}
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <FiCalendar size={56} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 10px var(--primary))', marginBottom: 16 }} />
-          <h1 style={{ fontSize: 32, fontWeight: 800, color: '#fff', marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
+          <h1 style={{ fontSize: 32, fontWeight: 800, color: 'var(--text)', marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
             Nepali Calendar — BS {currentYear}
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
@@ -91,7 +91,7 @@ export default function CalendarPage() {
           {today && (
             <div style={{ display: 'inline-flex', gap: 10, alignItems: 'center', marginTop: 12,
               background: 'var(--primary-light)', border: '1px solid rgba(157, 78, 221, 0.25)', borderRadius: 20, padding: '8px 20px' }}>
-              <span style={{ fontWeight: 700, color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+              <span style={{ fontWeight: 700, color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
                 <FiCalendar style={{ color: 'var(--primary)' }} /> Today: {today.bs.dayNp} {today.bs.monthNp} {today.bs.year} BS
               </span>
               <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>({today.ad})</span>
@@ -102,8 +102,8 @@ export default function CalendarPage() {
         {/* ── Today's panchang ────────────────────────────────────── */}
         {today && (
           <div className="card" style={{ marginBottom: 32,
-            background: 'radial-gradient(circle at 50% 50%, rgba(157,78,221,0.15), transparent 70%), #0e0921', color: '#fff' }}>
-            <h3 style={{ fontWeight: 800, marginBottom: 16, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+            background: 'var(--card)', color: 'var(--text)' }}>
+            <h3 style={{ fontWeight: 800, marginBottom: 16, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
               Today's Panchang — आजको पञ्चाङ्ग
             </h3>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -114,10 +114,10 @@ export default function CalendarPage() {
                 { label: 'Paksha',   value: today.paksha, icon: <FiCompass /> },
               ].map(item => (
                 <div key={item.label} style={{ flex: 1, minWidth: 140,
-                  background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(157,78,221,0.1)', borderRadius: 10, padding: '12px 14px' }}>
+                  background: 'var(--bg)', border: '1px solid rgba(157,78,221,0.1)', borderRadius: 10, padding: '12px 14px' }}>
                   <div style={{ fontSize: 18, marginBottom: 6, color: 'var(--primary)' }}>{item.icon}</div>
                   <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{item.label}</div>
-                  <div style={{ fontWeight: 700, fontSize: 13, color: '#fff', marginTop: 4 }}>{item.value}</div>
+                  <div style={{ fontWeight: 700, fontSize: 13, color: 'var(--text)', marginTop: 4 }}>{item.value}</div>
                 </div>
               ))}
             </div>
@@ -126,8 +126,8 @@ export default function CalendarPage() {
                 <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>Today's Events:</div>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {today.festivals.map((f, i) => (
-                    <span key={i} style={{ background: 'rgba(157,78,221,0.15)', border: '1px solid rgba(157,78,221,0.2)', borderRadius: 20,
-                      padding: '4px 12px', fontSize: 13, color: '#fff' }}>
+                    <span key={i} style={{ background: 'rgba(123, 44, 191, 0.08)', border: '1px solid var(--border)', borderRadius: 20,
+                      padding: '4px 12px', fontSize: 13, color: 'var(--primary)', fontWeight: 600 }}>
                       {f.name}
                     </span>
                   ))}
@@ -195,11 +195,15 @@ export default function CalendarPage() {
                 {/* Day headers */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 8, marginBottom: 8 }}>
                   {DAYS_NP.map((d, i) => (
-                    <div key={d} style={{ textAlign: 'center', padding: '10px 4px',
-                      fontWeight: 700, fontSize: 13,
-                      background: 'rgba(255,255,255,0.02)', borderRadius: 8,
-                      color: i===6 ? '#ff4d6d' : i===0 ? 'var(--secondary)' : 'var(--text-muted)' }}>
-                      {d}
+                    <div key={d} style={{
+                      textAlign: 'center',
+                      padding: '10px 4px',
+                      fontWeight: 700,
+                      fontSize: 13,
+                      background: 'rgba(123, 44, 191, 0.03)',
+                      borderRadius: 8,
+                      color: i===6 ? '#ff4d6d' : i===0 ? 'var(--secondary)' : 'var(--text-muted)'
+                    }}>  {d}
                       <div style={{ fontSize: 10, fontWeight: 400, opacity: 0.7 }}>{DAYS_EN[i]}</div>
                     </div>
                   ))}
@@ -283,16 +287,16 @@ export default function CalendarPage() {
                 {selectedDay && (
                   <div style={{
                     marginTop: 20, padding: 24,
-                    background: 'rgba(21, 14, 40, 0.9)',
+                    background: 'var(--card)',
                     borderRadius: 12,
-                    border: '1.5px solid var(--secondary)',
-                    boxShadow: '0 0 20px rgba(255, 158, 0, 0.15)',
+                    border: '1.5px solid var(--border)',
+                    boxShadow: 'var(--shadow)',
                     backdropFilter: 'blur(8px)'
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between',
                       alignItems: 'flex-start', marginBottom: 16 }}>
                       <div>
-                        <h4 style={{ fontWeight: 800, fontSize: 18, margin: 0, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+                        <h4 style={{ fontWeight: 800, fontSize: 18, margin: 0, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
                           {selectedDay.bsDayNp} {BS_MONTHS_NP[currentMonth-1]} {currentYear} BS
                         </h4>
                         <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0' }}>
@@ -300,7 +304,7 @@ export default function CalendarPage() {
                         </p>
                       </div>
                       <button onClick={() => setSelectedDay(null)}
-                        style={{ background: 'rgba(255,255,255,0.05)', border: 'none', width: 28, height: 28, borderRadius: '50%', fontSize: 14,
+                        style={{ background: 'rgba(123, 44, 191, 0.08)', border: 'none', width: 28, height: 28, borderRadius: '50%', fontSize: 14,
                           cursor: 'pointer', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifySelf: 'center', justifyContent: 'center' }}>
                         ✕
                       </button>
@@ -312,7 +316,7 @@ export default function CalendarPage() {
                         { label: 'Tithi',  value: selectedDay.tithi,  icon: <FiMoon /> },
                         { label: 'Paksha', value: selectedDay.paksha, icon: <FiCompass /> },
                       ].map(item => (
-                        <div key={item.label} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(157,78,221,0.15)', borderRadius: 8,
+                        <div key={item.label} style={{ background: 'rgba(123,44,191,0.03)', border: '1px solid var(--border)', borderRadius: 8,
                           padding: '8px 16px', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                           <span style={{ color: 'var(--primary)' }}>{item.icon}</span> <strong>{item.label}:</strong> {item.value}
                         </div>

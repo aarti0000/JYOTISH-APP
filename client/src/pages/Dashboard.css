@@ -9,7 +9,7 @@
 .dashboard-header h1 {
   font-size: 26px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text);
   font-family: 'Cinzel', serif;
 }
 
@@ -40,7 +40,7 @@
 .stat-value {
   font-size: 30px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text);
 }
 .stat-label {
   font-size: 12px;
@@ -70,12 +70,11 @@
   transition: all 0.2s ease;
 }
 .tab:hover {
-  color: #fff;
+  color: var(--primary);
 }
 .tab.active {
-  color: #fff;
+  color: var(--primary);
   border-bottom-color: var(--primary);
-  text-shadow: 0 0 5px rgba(157, 78, 221, 0.5);
 }
 
 .appt-list {
@@ -88,7 +87,7 @@
   align-items: center;
   gap: 14px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   flex-wrap: wrap;
@@ -96,7 +95,7 @@
 }
 .appt-item:hover {
   border-color: rgba(157, 78, 221, 0.35);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--primary-light);
 }
 .appt-info {
   flex: 1;

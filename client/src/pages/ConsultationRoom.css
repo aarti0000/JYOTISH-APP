@@ -11,8 +11,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  background: rgba(21, 14, 40, 0.95);
-  border-bottom: 1px solid rgba(157, 78, 221, 0.15);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
 }
 .room-header-left {
@@ -110,8 +110,8 @@
 .chat-panel {
   width: 340px;
   flex-shrink: 0;
-  background: rgba(21, 14, 40, 0.95);
-  border-left: 1px solid rgba(157, 78, 221, 0.15);
+  background: var(--card);
+  border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(12px);
@@ -127,14 +127,14 @@
 }
 
 .tab-bar {
-  background: rgba(9, 5, 20, 0.6);
-  border-bottom: 1px solid rgba(157, 78, 221, 0.15);
+  background: rgba(123, 44, 191, 0.05);
+  border-bottom: 1px solid var(--border);
 }
 .tab {
   color: var(--text-muted);
 }
 .tab.active {
-  color: #fff;
+  color: var(--primary);
   border-bottom-color: var(--primary);
 }
 
@@ -173,9 +173,9 @@
   box-shadow: 0 4px 12px rgba(157, 78, 221, 0.15);
 }
 .theirs .message-bubble {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(123, 44, 191, 0.08);
   color: var(--text);
-  border: 1px solid rgba(157, 78, 221, 0.15);
+  border: 1px solid var(--border);
   border-bottom-left-radius: 4px;
 }
 .message-time {

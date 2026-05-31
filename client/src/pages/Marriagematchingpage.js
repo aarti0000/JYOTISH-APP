@@ -114,16 +114,16 @@ export default function MarriageMatchingPage() {
         <div className="container" style={{ maxWidth: 580 }}>
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
             <FiUsers size={56} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 10px var(--primary))', marginBottom: 16 }} />
-            <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 8, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+            <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 8, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
               Kundali Marriage Matching
             </h1>
             <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 24, lineHeight: 1.7 }}>
               Get detailed Ashtakoot Guna Milan analysis based on Vedic astrology.
               Check compatibility before your marriage.
             </p>
-            <div style={{ background: 'var(--primary-light)', borderRadius: 14,
-              padding: 24, marginBottom: 28, border: '1px solid var(--primary)' }}>
-              <p style={{ fontWeight: 700, color: '#fff', marginBottom: 6, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+             <div style={{ background: 'var(--primary-light)', borderRadius: 14,
+              padding: 24, marginBottom: 28, border: '1.5px solid var(--border)' }}>
+              <p style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: 6, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                 <FiLock /> Login Required
               </p>
               <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0 }}>
@@ -151,7 +151,7 @@ export default function MarriageMatchingPage() {
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
           <FiUsers size={56} style={{ color: 'var(--primary)', filter: 'drop-shadow(0 0 10px var(--primary))', marginBottom: 16 }} />
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: '#fff', marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
+          <h1 style={{ fontSize: 28, fontWeight: 800, color: 'var(--text)', marginBottom: 8, fontFamily: "'Cinzel', serif" }}>
             Kundali Marriage Matching
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: 14, maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
@@ -186,10 +186,10 @@ export default function MarriageMatchingPage() {
             {/* Score banner */}
             <div style={{
               borderRadius: 16, padding: '40px 24px', marginBottom: 28,
-              textAlign: 'center', color: '#fff',
-              background: `linear-gradient(135deg, ${result.color}25, rgba(9, 5, 20, 0.95))`,
+              textAlign: 'center', color: 'var(--text)',
+              background: `linear-gradient(135deg, ${result.color}15, var(--card))`,
               border: `1.5px solid ${result.color}`,
-              boxShadow: `0 0 20px ${result.color}25`
+              boxShadow: `0 0 20px ${result.color}15`
             }}>
               <div style={{ fontSize: 14, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: 0.5, marginBottom: 12 }}>
                 {result.boy.name} & {result.girl.name}
@@ -201,13 +201,13 @@ export default function MarriageMatchingPage() {
                 width: 140, height: 140, margin: '0 auto 20px' }}>
                 <svg width="140" height="140" style={{ position: 'absolute', top: 0, left: 0 }}>
                   <circle cx="70" cy="70" r="60" fill="none"
-                    stroke="rgba(255,255,255,0.06)" strokeWidth="10" />
+                    stroke="var(--border)" strokeWidth="10" />
                   <circle cx="70" cy="70" r="60" fill="none"
                     stroke={result.color} strokeWidth="10"
                     strokeDasharray={`${2 * Math.PI * 60 * result.totalScore / result.maxScore} ${2 * Math.PI * 60}`}
                     strokeLinecap="round"
                     transform="rotate(-90 70 70)"
-                    style={{ filter: `drop-shadow(0 0 6px ${result.color})` }} />
+                    style={{ filter: `drop-shadow(0 0 4px ${result.color})` }} />
                 </svg>
                 <div style={{ zIndex: 1, textAlign: 'center' }}>
                   <div style={{ fontSize: 38, fontWeight: 900, lineHeight: 1 }}>
@@ -217,7 +217,7 @@ export default function MarriageMatchingPage() {
                 </div>
               </div>
 
-              <h2 style={{ fontSize: 26, fontWeight: 800, margin: '0 0 8px', color: '#fff', fontFamily: "'Cinzel', serif" }}>
+              <h2 style={{ fontSize: 26, fontWeight: 800, margin: '0 0 8px', color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
                 {result.compatibility}
               </h2>
               <p style={{ fontSize: 16, color: 'var(--text-muted)', margin: '0 0 16px' }}>
@@ -248,9 +248,9 @@ export default function MarriageMatchingPage() {
                     ['Sign Lord',   data.signLord],
                     ['Varna',       data.varna],
                   ].map(([k, v]) => (
-                    <div key={k} style={{ display: 'flex', gap: 10, marginBottom: 10, fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.02)', paddingBottom: 6 }}>
+                    <div key={k} style={{ display: 'flex', gap: 10, marginBottom: 10, fontSize: 13, borderBottom: '1px solid var(--border)', paddingBottom: 6 }}>
                       <span style={{ color: 'var(--text-muted)', minWidth: 90 }}>{k}:</span>
-                      <strong style={{ color: '#fff' }}>{v}</strong>
+                      <strong style={{ color: 'var(--text)' }}>{v}</strong>
                     </div>
                   ))}
                 </div>
@@ -259,7 +259,7 @@ export default function MarriageMatchingPage() {
 
             {/* Ashtakoot Guna bars */}
             <div className="card" style={{ marginBottom: 28 }}>
-              <h3 style={{ fontWeight: 800, fontSize: 18, marginBottom: 24, color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'Cinzel', serif" }}>
+              <h3 style={{ fontWeight: 800, fontSize: 18, marginBottom: 24, color: 'var(--text)', display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'Cinzel', serif" }}>
                 <FiCompass /> Ashtakoot Guna Milan — 8 Factors
               </h3>
 
@@ -275,7 +275,7 @@ export default function MarriageMatchingPage() {
                       <div style={{ display: 'flex', justifyContent: 'space-between',
                         alignItems: 'flex-start', marginBottom: 10, flexWrap: 'wrap', gap: 6 }}>
                       <div>
-                          <span style={{ fontWeight: 800, fontSize: 15, color: '#fff' }}>
+                          <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--text)' }}>
                             {i + 1}. {g.name}
                           </span>
                           <span style={{ fontSize: 13, color: 'var(--text-muted)', marginLeft: 8 }}>
@@ -293,7 +293,7 @@ export default function MarriageMatchingPage() {
                       </div>
 
                       {/* Progress bar */}
-                      <div style={{ background: 'rgba(255,255,255,0.06)', borderRadius: 20,
+                      <div style={{ background: 'rgba(123, 44, 191, 0.08)', borderRadius: 20,
                         height: 8, marginBottom: 12 }}>
                         <div style={{ height: 8, borderRadius: 20, background: barColor,
                           width: barPct + '%', transition: 'width 0.6s ease',
@@ -310,8 +310,8 @@ export default function MarriageMatchingPage() {
 
                       {g.isNadiDosha && (
                         <div style={{ marginTop: 12, padding: '8px 14px',
-                          background: 'rgba(255, 77, 109, 0.15)', border: '1px solid rgba(255, 77, 109, 0.25)', borderRadius: 8, fontSize: 12,
-                          color: '#ff758f', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                          background: 'rgba(255, 77, 109, 0.08)', border: '1px solid rgba(255, 77, 109, 0.2)', borderRadius: 8, fontSize: 12,
+                          color: '#ff4d6d', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                           <FiAlertTriangle /> Nadi Dosha detected — consult an astrologer for remedies
                         </div>
                       )}
@@ -348,13 +348,13 @@ export default function MarriageMatchingPage() {
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {result.doshas.map((d, i) => (
-                    <div key={i} style={{ padding: '14px', background: 'rgba(9, 5, 20, 0.5)',
+                    <div key={i} style={{ padding: '14px', background: 'var(--card)',
                       borderRadius: 10, border: '1px solid rgba(255, 77, 109, 0.15)' }}>
-                      <div style={{ fontWeight: 700, fontSize: 15, color: '#ff758f', marginBottom: 6 }}>
+                      <div style={{ fontWeight: 700, fontSize: 15, color: '#ff4d6d', marginBottom: 6 }}>
                         {d.name} ({d.np})
                       </div>
                       <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                        <strong style={{ color: '#fff' }}>Remedy:</strong> {d.remedy}
+                        <strong style={{ color: 'var(--text)' }}>Remedy:</strong> {d.remedy}
                       </div>
                     </div>
                   ))}
@@ -367,7 +367,7 @@ export default function MarriageMatchingPage() {
 
             {/* Score guide */}
             <div className="card" style={{ marginBottom: 28 }}>
-              <h3 style={{ fontWeight: 800, fontSize: 16, marginBottom: 16, display: 'inline-flex', alignItems: 'center', gap: 8, color: '#fff', fontFamily: "'Cinzel', serif" }}>
+              <h3 style={{ fontWeight: 800, fontSize: 16, marginBottom: 16, display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text)', fontFamily: "'Cinzel', serif" }}>
                 <FiSliders /> Score Interpretation Guide
               </h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 10 }}>
@@ -407,8 +407,8 @@ export default function MarriageMatchingPage() {
             </div>
 
             {/* Disclaimer */}
-            <div style={{ background: 'rgba(9, 5, 20, 0.4)', borderRadius: 12, padding: '16px 20px',
-              border: '1px solid rgba(157, 78, 221, 0.15)', marginBottom: 20 }}>
+            <div style={{ background: 'var(--card)', borderRadius: 12, padding: '16px 20px',
+              border: '1px solid var(--border)', marginBottom: 20 }}>
               <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: 0, lineHeight: 1.8 }}>
                 <strong>Disclaimer:</strong> This marriage matching tool is based on traditional
                 Vedic astrology principles and is intended for educational and informational
