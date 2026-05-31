@@ -91,7 +91,7 @@ export default function Register() {
           </button>
         </form>
         <p className="auth-footer">
-          Already have an account? <Link to="/login">Sign In</Link>
+          Already have an account? <Link to="/login">Log In</Link>
         </p>
       </div>
     </div>

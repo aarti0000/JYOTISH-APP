@@ -9,6 +9,9 @@ import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 
 // Pages
+import RatingPage from './pages/RatingPage';
+import CalendarPage from './pages/CalendarPage';
+import HoroscopePage from './pages/HoroscopePage';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -39,9 +42,10 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/astrologers" element={<AstrologerList />} />
         <Route path="/astrologers/:id" element={<AstrologerProfile />} />
-
+        <Route path="/horoscope" element={<HoroscopePage />} />
         <Route path="/book/:astrologerId" element={
           <PrivateRoute><BookAppointment /></PrivateRoute>
         } />
@@ -51,6 +55,9 @@ function AppRoutes() {
         <Route path="/dashboard" element={
           <PrivateRoute roles={['user']}><UserDashboard /></PrivateRoute>
         } />
+        <Route path="/rate/:appointmentId" element={
+  <PrivateRoute><RatingPage /></PrivateRoute>
+} />
         <Route path="/astrologer/dashboard" element={
           <PrivateRoute roles={['astrologer']}><AstrologerDashboard /></PrivateRoute>
         } />

@@ -32,7 +32,8 @@ app.use('/api/kundali',      require('./routes/kundaliRoutes'));
 app.use('/api/payments',     require('./routes/paymentRoutes'));
 app.use('/api/reviews',      require('./routes/reviewRoutes'));
 app.use('/api/notifications',require('./routes/notificationRoutes'));
-
+app.use('/api/horoscope', require('./routes/horoscopeRoutes'));
+app.use('/api/calendar', require('./routes/calendarRoutes'));
 // Health check
 app.get('/', (req, res) => res.json({ message: 'Jyotish API running ✨' }));
 

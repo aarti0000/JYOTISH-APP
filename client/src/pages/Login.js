@@ -31,7 +31,7 @@ export default function Login() {
         <div className="auth-logo">
           <FiStar style={{ color: '#f59e0b', fontSize: 28 }} />
           <h1>Welcome Back</h1>
-          <p>Sign in to your JyotishApp account</p>
+          <p>Sign in to your AstroConnect account</p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -52,7 +52,7 @@ export default function Login() {
           </div>
           <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '12px' }}
             type="submit" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Signing in...' : 'Log In'}
           </button>
         </form>
         <p className="auth-footer">

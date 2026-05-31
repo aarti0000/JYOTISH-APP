@@ -1,86 +1,109 @@
 const asyncHandler = require('express-async-handler');
-const Razorpay = require('razorpay');
 const crypto = require('crypto');
-const { Payment } = require('../models/index');
 const Appointment = require('../models/Appointment');
+const { Payment } = require('../models/index');
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+const ESEWA_CONFIG = {
+  merchantId:  process.env.ESEWA_MERCHANT_ID  || 'EPAYTEST',
+  secretKey:   process.env.ESEWA_SECRET_KEY   || '8gBm/:&EnhH.1/q',
+  gatewayUrl:  process.env.ESEWA_GATEWAY_URL  || 'https://rc-epay.esewa.com.np/api/epay/main/v2/form',
+};
 
-// @POST /api/payments/create-order
-const createOrder = asyncHandler(async (req, res) => {
+function generateSignature(message) {
+  return crypto
+    .createHmac('sha256', ESEWA_CONFIG.secretKey)
+    .update(message)
+    .digest('base64');
+}
+
+const initiatePayment = asyncHandler(async (req, res) => {
   const { appointmentId } = req.body;
-
   const appointment = await Appointment.findById(appointmentId);
-  if (!appointment) {
-    res.status(404);
-    throw new Error('Appointment not found');
-  }
-  if (appointment.user.toString() !== req.user._id.toString()) {
-    res.status(403);
-    throw new Error('Not authorized');
-  }
+  if (!appointment) { res.status(404); throw new Error('Appointment not found'); }
 
-  const options = {
-    amount: appointment.amount * 100,   // paise
-    currency: 'INR',
-    receipt: `receipt_${appointmentId}`,
-    notes: { appointmentId: appointmentId.toString(), userId: req.user._id.toString() },
-  };
+  const transactionUuid = `JA-${appointmentId}-${Date.now()}`;
+  const amount = appointment.amount;
+  const productCode = ESEWA_CONFIG.merchantId;
+  const signatureMessage = `total_amount=${amount},transaction_uuid=${transactionUuid},product_code=${productCode}`;
+  const signature = generateSignature(signatureMessage);
 
-  const order = await razorpay.orders.create(options);
+  const baseUrl = process.env.CLIENT_URL || 'http://localhost:3000';
 
-  const payment = await Payment.create({
+  await Payment.create({
     user: req.user._id,
     appointment: appointmentId,
-    razorpayOrderId: order.id,
-    amount: appointment.amount,
+    esewaTransactionUuid: transactionUuid,
+    amount,
+    currency: 'NPR',
+    status: 'created',
   });
 
   res.json({
     success: true,
-    orderId: order.id,
-    amount: order.amount,
-    currency: order.currency,
-    paymentId: payment._id,
-    key: process.env.RAZORPAY_KEY_ID,
+    gatewayUrl: ESEWA_CONFIG.gatewayUrl,
+    formData: {
+      amount: amount.toString(),
+      tax_amount: '0',
+      total_amount: amount.toString(),
+      transaction_uuid: transactionUuid,
+      product_code: productCode,
+      product_service_charge: '0',
+      product_delivery_charge: '0',
+      success_url: `${baseUrl}/payment/success?appointmentId=${appointmentId}`,
+      failure_url: `${baseUrl}/payment/failure?appointmentId=${appointmentId}`,
+      signed_field_names: 'total_amount,transaction_uuid,product_code',
+      signature,
+    },
   });
 });
 
-// @POST /api/payments/verify
-const verifyPayment = asyncHandler(async (req, res) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, appointmentId } = req.body;
+const verifyEsewaPayment = asyncHandler(async (req, res) => {
+  const { data, appointmentId } = req.body;
+  if (!data) { res.status(400); throw new Error('No payment data'); }
 
-  const body = razorpay_order_id + '|' + razorpay_payment_id;
-  const expectedSignature = crypto
-    .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
-    .update(body)
-    .digest('hex');
+  const decoded = JSON.parse(Buffer.from(data, 'base64').toString('utf-8'));
+  const { status, signed_field_names, signature } = decoded;
 
-  if (expectedSignature !== razorpay_signature) {
-    res.status(400);
-    throw new Error('Payment verification failed');
-  }
+  const signedFields = signed_field_names.split(',');
+  const signatureMsg = signedFields.map(f => `${f}=${decoded[f]}`).join(',');
+  const expectedSig = generateSignature(signatureMsg);
 
-  // Update payment record
+  if (expectedSig !== signature) { res.status(400); throw new Error('Signature mismatch'); }
+  if (status !== 'COMPLETE') { res.status(400); throw new Error('Payment not complete'); }
+
   await Payment.findOneAndUpdate(
-    { razorpayOrderId: razorpay_order_id },
-    { razorpayPaymentId: razorpay_payment_id, razorpaySignature: razorpay_signature, status: 'paid' }
+    { esewaTransactionUuid: decoded.transaction_uuid },
+    { esewaRefId: decoded.transaction_code, status: 'paid' }
   );
-
-  // Confirm appointment
   await Appointment.findByIdAndUpdate(appointmentId, {
     paymentStatus: 'paid',
-    paymentId: razorpay_payment_id,
+    paymentId: decoded.transaction_code,
     status: 'confirmed',
   });
 
-  res.json({ success: true, message: 'Payment verified and appointment confirmed' });
+  res.json({ success: true, message: 'भुक्तानी सफल!' });
 });
 
-// @GET /api/payments/my-history
+const freeConfirm = asyncHandler(async (req, res) => {
+  const { appointmentId } = req.body;
+  const appointment = await Appointment.findById(appointmentId);
+  if (!appointment) { res.status(404); throw new Error('Not found'); }
+
+  await Appointment.findByIdAndUpdate(appointmentId, {
+    paymentStatus: 'paid',
+    status: 'confirmed',
+  });
+  await Payment.create({
+    user: req.user._id,
+    appointment: appointmentId,
+    amount: appointment.amount,
+    currency: 'NPR',
+    status: 'paid',
+  });
+
+  res.json({ success: true, message: 'Confirmed (Test Mode)' });
+});
+
 const getMyPaymentHistory = asyncHandler(async (req, res) => {
   const payments = await Payment.find({ user: req.user._id })
     .populate('appointment', 'date startTime type status')
@@ -88,4 +111,5 @@ const getMyPaymentHistory = asyncHandler(async (req, res) => {
   res.json({ success: true, payments });
 });
 
-module.exports = { createOrder, verifyPayment, getMyPaymentHistory };
+module.exports = { initiatePayment, verifyEsewaPayment, freeConfirm, getMyPaymentHistory };
+    

@@ -1,11 +1,12 @@
 // paymentRoutes.js
 const express = require('express');
 const router = express.Router();
-const { createOrder, verifyPayment, getMyPaymentHistory } = require('../controllers/paymentController');
+const { initiatePayment, verifyEsewaPayment, freeConfirm, getMyPaymentHistory } = require('../controllers/paymentController');
 const { protect } = require('../middleware/auth');
 
-router.post('/create-order', protect, createOrder);
-router.post('/verify', protect, verifyPayment);
-router.get('/my-history', protect, getMyPaymentHistory);
+router.post('/initiate',     protect, initiatePayment);
+router.post('/verify-esewa', protect, verifyEsewaPayment);
+router.post('/free-confirm', protect, freeConfirm);
+router.get('/my-history',    protect, getMyPaymentHistory);
 
 module.exports = router;

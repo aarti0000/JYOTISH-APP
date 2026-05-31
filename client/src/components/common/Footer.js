@@ -13,10 +13,10 @@ export default function Footer() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
               <FiStar style={{ color: '#f59e0b', fontSize: 20 }} />
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: 18 }}>JyotishApp</span>
+              <span style={{ color: '#fff', fontWeight: 700, fontSize: 18 }}>AstroConnect</span>
             </div>
             <p style={{ fontSize: 13, lineHeight: 1.7 }}>
-              India's trusted platform for authentic Vedic astrology consultations.
+              Nepal's trusted platform for authentic Vedic astrology consultations.
             </p>
           </div>
           <div>
@@ -37,12 +37,12 @@ export default function Footer() {
           </div>
           <div>
             <h4 style={{ color: '#fff', marginBottom: 12, fontSize: 14 }}>Contact</h4>
-            <p style={{ fontSize: 13, lineHeight: 1.7 }}>support@jyotishapp.com</p>
-            <p style={{ fontSize: 13 }}>+91 98765 43210</p>
+            <p style={{ fontSize: 13, lineHeight: 1.7 }}>support@astroconnect.com</p>
+            <p style={{ fontSize: 13 }}>061-523412</p>
           </div>
         </div>
         <div style={{ borderTop: '1px solid #312e81', paddingTop: 16, textAlign: 'center', fontSize: 12 }}>
-          © {new Date().getFullYear()} JyotishApp. All rights reserved.
+          © {new Date().getFullYear()} AstroConnect. All rights reserved.
         </div>
       </div>
     </footer>

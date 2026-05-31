@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 
 // ── Payment ──────────────────────────────────────────────────
 const paymentSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  user:        { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   appointment: { type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' },
-  razorpayOrderId: { type: String },
-  razorpayPaymentId: { type: String },
-  razorpaySignature: { type: String },
-  amount: { type: Number, required: true },
-  currency: { type: String, default: 'INR' },
-  status: { type: String, enum: ['created', 'paid', 'failed', 'refunded'], default: 'created' },
-  type: { type: String, enum: ['appointment', 'wallet_topup'], default: 'appointment' },
+  esewaTransactionUuid: { type: String },
+  esewaRefId:           { type: String },
+  amount:   { type: Number, required: true },
+  currency: { type: String, default: 'NPR' },
+  status:   { type: String, enum: ['created','paid','failed','refunded'], default: 'created' },
+  type:     { type: String, enum: ['appointment','wallet_topup'], default: 'appointment' },
 }, { timestamps: true });
 
 // ── Review ────────────────────────────────────────────────────

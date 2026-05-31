@@ -6,32 +6,53 @@ import toast from 'react-hot-toast';
 import { FiCalendar, FiClock, FiUser, FiMessageCircle, FiVideo, FiPhone, FiStar } from 'react-icons/fi';
 
 const STATUS_COLORS = {
-  pending: 'badge-yellow', confirmed: 'badge-green',
-  completed: 'badge-purple', cancelled: 'badge-red', ongoing: 'badge-green',
+  pending: 'badge-yellow',
+  confirmed: 'badge-green',
+  completed: 'badge-purple',
+  cancelled: 'badge-red',
+  ongoing: 'badge-green',
 };
 
-const typeIcons = { chat: <FiMessageCircle />, video: <FiVideo />, call: <FiPhone /> };
+const typeIcons = {
+  chat: <FiMessageCircle />,
+  video: <FiVideo />,
+  call: <FiPhone />,
+};
 
 export default function AppointmentDetail() {
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
+
   const [appt, setAppt] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [joining, setJoining] = useState(false);
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
-  const [submittingReview, setSubmittingReview] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    api.get(`/appointments/${id}`)
+    api.get('/appointments/' + id)
       .then(r => setAppt(r.data.appointment))
       .catch(() => toast.error('Appointment not found'))
       .finally(() => setLoading(false));
   }, [id]);
 
+  const handleJoin = async () => {
+    setJoining(true);
+    try {
+      const { data } = await api.post('/consultations/start/' + id);
+      navigate('/consultation/' + data.consultation._id);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to start consultation');
+    } finally {
+      setJoining(false);
+    }
+  };
+
   const handleCancel = async () => {
     if (!window.confirm('Cancel this appointment?')) return;
     try {
-      await api.put(`/appointments/${id}/cancel`, { reason: 'Cancelled by user' });
+      await api.put('/appointments/' + id + '/cancel', { reason: 'Cancelled by user' });
       toast.success('Appointment cancelled');
       setAppt(prev => ({ ...prev, status: 'cancelled' }));
     } catch (err) {
@@ -41,7 +62,7 @@ export default function AppointmentDetail() {
 
   const handleReview = async (e) => {
     e.preventDefault();
-    setSubmittingReview(true);
+    setSubmitting(true);
     try {
       await api.post('/reviews', {
         astrologerId: appt.astrologer._id,
@@ -53,16 +74,7 @@ export default function AppointmentDetail() {
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to submit review');
     } finally {
-      setSubmittingReview(false);
-    }
-  };
-
-  const startConsultation = async () => {
-    try {
-      const { data } = await api.post(`/consultations/start/${id}`);
-      navigate(`/consultation/${data.consultation._id}`);
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to start consultation');
+      setSubmitting(false);
     }
   };
 
@@ -75,63 +87,84 @@ export default function AppointmentDetail() {
   return (
     <div className="page">
       <div className="container" style={{ maxWidth: 700 }}>
+
+        {/* Top bar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
           <button className="btn btn-secondary" onClick={() => navigate(-1)}>← Back</button>
           <h1 style={{ fontSize: 22, fontWeight: 800 }}>Appointment Details</h1>
         </div>
 
-        {/* Status card */}
+        {/* Status + action buttons */}
         <div className="card" style={{ marginBottom: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-            <div>
-              <span className={`badge ${STATUS_COLORS[appt.status]}`} style={{ fontSize: 13, padding: '6px 14px' }}>
-                {appt.status.toUpperCase()}
-              </span>
-            </div>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {appt.status === 'confirmed' && (
-                <button className="btn btn-primary" onClick={startConsultation}>
-                  {typeIcons[appt.type]} Join Consultation
+            <span className={'badge ' + STATUS_COLORS[appt.status]} style={{ fontSize: 13, padding: '6px 14px' }}>
+              {appt.status.toUpperCase()}
+            </span>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+
+              {/* Join button — shows for confirmed or ongoing */}
+              {['confirmed', 'ongoing'].includes(appt.status) && (
+                <button
+                  className="btn btn-primary"
+                  onClick={handleJoin}
+                  disabled={joining}>
+                  {typeIcons[appt.type]} {joining ? 'Joining...' : 'Join Consultation'}
                 </button>
               )}
+
+              {/* Cancel button */}
               {appt.status === 'pending' && isUser && (
-                <button className="btn btn-danger" onClick={handleCancel}>Cancel</button>
+                <button className="btn btn-danger" onClick={handleCancel}>
+                  Cancel
+                </button>
               )}
+
+              {/* Pay button */}
               {appt.paymentStatus === 'unpaid' && appt.status !== 'cancelled' && (
-                <Link to={`/payment/${id}`} className="btn btn-primary">Pay Now</Link>
+                <Link to={'/payment/' + id} className="btn btn-primary">
+                  Pay Now
+                </Link>
               )}
+
             </div>
           </div>
         </div>
 
-        {/* Astrologer info */}
+        {/* Astrologer card */}
         <div className="card" style={{ marginBottom: 20 }}>
           <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
             <div className="avatar" style={{ width: 56, height: 56, fontSize: 20 }}>
-              {astrologer?.user?.avatar ? <img src={astrologer.user.avatar} alt="" /> : astrologer?.user?.name?.[0]}
+              {astrologer?.user?.avatar
+                ? <img src={astrologer.user.avatar} alt="" />
+                : astrologer?.user?.name?.[0]}
             </div>
             <div>
               <h3 style={{ fontWeight: 700 }}>{astrologer?.user?.name}</h3>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 4 }}>
-                {astrologer?.specializations?.map(s => <span key={s} className="badge badge-purple">{s}</span>)}
+                {astrologer?.specializations?.map(s => (
+                  <span key={s} className="badge badge-purple">{s}</span>
+                ))}
               </div>
             </div>
-            <Link to={`/astrologers/${astrologer?._id}`} className="btn btn-secondary" style={{ marginLeft: 'auto' }}>
+            <Link
+              to={'/astrologers/' + astrologer?._id}
+              className="btn btn-secondary"
+              style={{ marginLeft: 'auto' }}>
               View Profile
             </Link>
           </div>
         </div>
 
-        {/* Appointment details */}
+        {/* Appointment info */}
         <div className="card" style={{ marginBottom: 20 }}>
           <h3 style={{ fontWeight: 700, marginBottom: 14 }}>Appointment Info</h3>
           {[
-            ['Date', appt.date, <FiCalendar />],
-            ['Time', appt.startTime, <FiClock />],
-            ['Duration', `${appt.duration} minutes`],
-            ['Type', appt.type?.toUpperCase(), typeIcons[appt.type]],
-            ['Amount', `₹${appt.amount}`],
-            ['Payment', appt.paymentStatus],
+            ['Date',     appt.date,                        <FiCalendar />],
+            ['Time',     appt.startTime,                   <FiClock />],
+            ['Duration', appt.duration + ' minutes',       null],
+            ['Type',     appt.type?.toUpperCase(),         typeIcons[appt.type]],
+            ['Amount',   'Rs. ' + appt.amount,             null],
+            ['Payment',  appt.paymentStatus,               null],
           ].map(([label, value, icon]) => (
             <div key={label} style={{ display: 'flex', gap: 10, marginBottom: 10, fontSize: 14 }}>
               <span style={{ color: 'var(--text-muted)', minWidth: 100, display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -146,7 +179,8 @@ export default function AppointmentDetail() {
         {appt.userBirthDetails && (
           <div className="card" style={{ marginBottom: 20 }}>
             <h3 style={{ fontWeight: 700, marginBottom: 14 }}>
-              <FiUser style={{ marginRight: 6, verticalAlign: 'middle' }} />Birth Details Provided
+              <FiUser style={{ marginRight: 6, verticalAlign: 'middle' }} />
+              Birth Details
             </h3>
             {Object.entries(appt.userBirthDetails).map(([k, v]) => v && (
               <div key={k} style={{ display: 'flex', gap: 10, marginBottom: 8, fontSize: 14 }}>
@@ -165,7 +199,7 @@ export default function AppointmentDetail() {
           </div>
         )}
 
-        {/* Leave review */}
+        {/* Review form — only after completed consultation */}
         {appt.status === 'completed' && isUser && (
           <div className="card">
             <h3 style={{ fontWeight: 700, marginBottom: 14 }}>
@@ -177,9 +211,14 @@ export default function AppointmentDetail() {
                 <label>Rating</label>
                 <div style={{ display: 'flex', gap: 6 }}>
                   {[1, 2, 3, 4, 5].map(n => (
-                    <button type="button" key={n}
+                    <button
+                      type="button"
+                      key={n}
                       style={{
-                        fontSize: 24, background: 'none', border: 'none', cursor: 'pointer',
+                        fontSize: 28,
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
                         color: n <= reviewForm.rating ? '#f59e0b' : '#d1d5db',
                       }}
                       onClick={() => setReviewForm({ ...reviewForm, rating: n })}>
@@ -190,16 +229,22 @@ export default function AppointmentDetail() {
               </div>
               <div className="form-group">
                 <label>Comment</label>
-                <textarea className="input" rows={3} value={reviewForm.comment}
+                <textarea
+                  className="input"
+                  rows={3}
+                  value={reviewForm.comment}
                   onChange={e => setReviewForm({ ...reviewForm, comment: e.target.value })}
-                  placeholder="Share your experience..." style={{ resize: 'vertical' }} />
+                  placeholder="Share your experience..."
+                  style={{ resize: 'vertical' }}
+                />
               </div>
-              <button className="btn btn-primary" type="submit" disabled={submittingReview}>
-                {submittingReview ? 'Submitting...' : 'Submit Review'}
+              <button className="btn btn-primary" type="submit" disabled={submitting}>
+                {submitting ? 'Submitting...' : 'Submit Review'}
               </button>
             </form>
           </div>
         )}
+
       </div>
     </div>
   );
